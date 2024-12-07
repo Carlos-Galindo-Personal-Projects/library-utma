@@ -17,7 +17,7 @@ namespace library_utma_backend.Models
         [Required]
         public required int UserTypeId { get; set; }
 
-        public required UserType UserType { get; set; }
+        public UserType UserType { get; set; }
 
         public bool VerifyPassword(string password, string hashedPassword)
         {
