@@ -1,4 +1,5 @@
 using library_utma_backend.Context;
+using library_utma_backend.Helpers;
 using library_utma_backend.SwaggerConfig;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ var connection = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContextPool<AppDbContext>(options =>
     options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 39))
 ));
+builder.Services.AddSingleton<JsonWebToken>();
 
 builder.Services.AddCors(options =>
 {
