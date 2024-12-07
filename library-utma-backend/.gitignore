@@ -1,0 +1,33 @@
+# Archivos y carpetas generadas automáticamente
+bin/
+obj/
+
+# Paquetes NuGet
+*.nupkg
+*.snupkg
+
+# Archivos de configuración del entorno de desarrollo
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Configuración sensible
+launchSettings.json
+appsettings.json
+appsettings.Development.json
+
+# Archivos temporales
+logs/
+*.log
+
+# Archivos de depuración
+*.pdb
+
+# Otros
+*.dbmdl
+*.jfm
+*.rsuser
+*.vs/
