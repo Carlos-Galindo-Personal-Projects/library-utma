@@ -11,7 +11,7 @@ using library_utma_backend.Context;
 namespace library_utma_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241207210810_InitialMigration")]
+    [Migration("20241207225718_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
