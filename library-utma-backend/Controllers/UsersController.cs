@@ -53,7 +53,9 @@ namespace library_utma_backend.Controllers
                     return BadRequest("La solicitud no puede ser nula.");
                 }
 
-                var user = await _context.User.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
+                var user = await _context.User
+                    .Include(u => u.UserType)
+                    .FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
 
                 if (user == null)
                 {
@@ -69,7 +71,7 @@ namespace library_utma_backend.Controllers
 
                 var token = _jwt.GenerateToken(user.Name, user.UserType.Name);
 
-                return Ok(token);
+                return Ok(new JsonWebToken { Token = token });
             }
             catch (Exception ex)
             {
