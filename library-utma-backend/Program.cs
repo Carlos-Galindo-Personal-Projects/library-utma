@@ -1,5 +1,6 @@
 using library_utma_backend.Context;
 using library_utma_backend.Helpers;
+using library_utma_backend.Models;
 using library_utma_backend.SwaggerConfig;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ builder.Services.AddDbContextPool<AppDbContext>(options =>
     options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 39))
 ));
 builder.Services.AddSingleton<JsonWebToken>();
+builder.Services.AddSingleton<User>();
 
 builder.Services.AddCors(options =>
 {
@@ -34,7 +36,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cfe-Tiempo-Extra-Api", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Library-UTMA-API", Version = "v1" });
 
     // Definir el esquema de seguridad
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -47,11 +49,10 @@ builder.Services.AddSwaggerGen(c =>
         Description = "Introduce el JWT in format: Bearer {token}"
     });
 
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     //c.IncludeXmlComments(xmlPath);
 
-    // Agregar los requisitos de seguridad
     c.OperationFilter<AuthorizeCheckOperationFilter>();
 });
 

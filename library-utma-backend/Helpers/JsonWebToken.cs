@@ -19,6 +19,8 @@ namespace library_utma_backend.Helpers
             _audience = System.Environment.GetEnvironmentVariable("AUDIENCE") ?? throw new ArgumentNullException("Jwt:Audience no se encuentra en la configuración.");
         }
 
+        public required string Token { get; set; }
+
         public string GenerateToken(string name, string userType)
         {
             if (string.IsNullOrWhiteSpace(name))
