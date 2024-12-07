@@ -69,7 +69,7 @@ namespace library_utma_backend.Controllers
                     return BadRequest("La contraseña es incorrecta.");
                 }
 
-                var token = _jwt.GenerateToken(user.Name, user.UserType.Name);
+                var token = _jwt.GenerateToken(user.Id ,user.Name, user.UserType.Name);
 
                 return Ok(new JsonWebToken { Token = token });
             }

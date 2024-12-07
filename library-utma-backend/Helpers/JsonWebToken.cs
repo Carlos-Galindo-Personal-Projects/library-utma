@@ -21,7 +21,7 @@ namespace library_utma_backend.Helpers
 
         public required string Token { get; set; }
 
-        public string GenerateToken(string name, string userType)
+        public string GenerateToken(int userId, string name, string userType)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -33,6 +33,11 @@ namespace library_utma_backend.Helpers
                 throw new ArgumentOutOfRangeException(nameof(userType), "El tipo de usuario no puede ser nulo o vacío.");
             }
 
+            if (userId <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(userId), "El ID del usuario no puede ser menor o igual a cero.");
+            }
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -41,6 +46,7 @@ namespace library_utma_backend.Helpers
             {
                 new Claim(JwtRegisteredClaimNames.Name, name),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("Id", userId.ToString()),
                 new Claim("Utstr", userType),
             };
 
