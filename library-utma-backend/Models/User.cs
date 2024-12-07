@@ -19,6 +19,8 @@ namespace library_utma_backend.Models
 
         public UserType UserType { get; set; }
 
+        public ICollection<Activity> Activities { get; set; }
+
         public bool VerifyPassword(string password, string hashedPassword)
         {
             return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
@@ -28,6 +30,5 @@ namespace library_utma_backend.Models
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
-
     }
 }
