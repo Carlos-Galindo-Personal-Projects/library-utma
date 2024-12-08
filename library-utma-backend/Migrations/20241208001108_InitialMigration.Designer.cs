@@ -12,8 +12,8 @@ using library_utma_backend.Context;
 namespace library_utma_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241207234115_AddStudentsCareersActivities")]
-    partial class AddStudentsCareersActivities
+    [Migration("20241208001108_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,38 @@ namespace library_utma_backend.Migrations
                     b.ToTable("Activity");
                 });
 
+            modelBuilder.Entity("library_utma_backend.Models.Book", b =>
+                {
+                    b.Property<string>("ISBN")
+                        .HasMaxLength(13)
+                        .HasColumnType("varchar(13)");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<string>("Genre")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("varchar(32)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("ISBN");
+
+                    b.ToTable("Book");
+                });
+
             modelBuilder.Entity("library_utma_backend.Models.Career", b =>
                 {
                     b.Property<int>("Id")
@@ -81,6 +113,39 @@ namespace library_utma_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Career");
+                });
+
+            modelBuilder.Entity("library_utma_backend.Models.Loan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BookISBN")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("varchar(13)");
+
+                    b.Property<DateTime>("LoanDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("ReturnDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookISBN");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Loan");
                 });
 
             modelBuilder.Entity("library_utma_backend.Models.Student", b =>
@@ -179,6 +244,25 @@ namespace library_utma_backend.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("library_utma_backend.Models.Loan", b =>
+                {
+                    b.HasOne("library_utma_backend.Models.Book", "Book")
+                        .WithMany("Loans")
+                        .HasForeignKey("BookISBN")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("library_utma_backend.Models.Student", "Student")
+                        .WithMany("Loans")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("library_utma_backend.Models.Student", b =>
                 {
                     b.HasOne("library_utma_backend.Models.Career", "Career")
@@ -201,6 +285,11 @@ namespace library_utma_backend.Migrations
                     b.Navigation("UserType");
                 });
 
+            modelBuilder.Entity("library_utma_backend.Models.Book", b =>
+                {
+                    b.Navigation("Loans");
+                });
+
             modelBuilder.Entity("library_utma_backend.Models.Career", b =>
                 {
                     b.Navigation("Students");
@@ -209,6 +298,8 @@ namespace library_utma_backend.Migrations
             modelBuilder.Entity("library_utma_backend.Models.Student", b =>
                 {
                     b.Navigation("Activities");
+
+                    b.Navigation("Loans");
                 });
 
             modelBuilder.Entity("library_utma_backend.Models.User", b =>
