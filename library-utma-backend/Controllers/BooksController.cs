@@ -91,5 +91,43 @@ namespace library_utma_backend.Controllers
                 return StatusCode(500, $"Error interno del servidor: {e.Message}");
             }
         }
+
+        // PUT: api/Books/{isbn}
+        [HttpPut("{isbn}")]
+        public async Task<ActionResult<ResponseMessage>> UpdateBookAmount(string isbn, [FromBody] BookAmountRequestDTO amountRequest)
+        {
+            try
+            {
+
+                if (string.IsNullOrEmpty(isbn))
+                {
+                    return BadRequest("El ISBN no puede ser nulo o vacío.");
+                }
+
+                if (amountRequest == null)
+                {
+                    return BadRequest("La solicitud no puede ser nula.");
+                }
+
+                var book = await _context.Book
+                    .FirstOrDefaultAsync(b => b.ISBN == isbn);
+
+                if (book == null)
+                {
+                    return NotFound("El libro especificado no existe.");
+                }
+
+                book.Amount = amountRequest.Amount;
+
+                _context.Entry(book).Property(b => b.Amount).IsModified = true;
+                await _context.SaveChangesAsync();
+
+                return Ok(new ResponseMessage { Message = "Libro actualizado correctamente." });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Error interno del servidor: {e.Message}");
+            }
+        }
     }
 }
