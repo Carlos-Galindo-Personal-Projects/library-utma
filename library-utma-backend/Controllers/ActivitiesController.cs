@@ -42,6 +42,14 @@ namespace library_utma_backend.Controllers
                     return NotFound("El estudiante especificado no existe.");
                 }
 
+                var isInside = await _context.Activity
+                    .FirstOrDefaultAsync(a => a.StudentId == activityRequest.StudentId && a.InsideLibrary == true);
+
+                if (isInside != null)
+                {
+                    return BadRequest("El estudiante ya se encuentra dentro de la biblioteca.");
+                }
+
                 var activity = new Activity
                 {
                     StudentId = activityRequest.StudentId,
@@ -85,6 +93,7 @@ namespace library_utma_backend.Controllers
                 {
                     return NotFound("La actividad especificada no existe.");
                 }
+
                 activity.FinalHour = DateTime.Now;
                 activity.InsideLibrary = false;
 
