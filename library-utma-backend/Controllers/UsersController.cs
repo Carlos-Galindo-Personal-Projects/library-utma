@@ -73,9 +73,9 @@ namespace library_utma_backend.Controllers
 
                 return Ok(new JsonWebToken { Token = token });
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+                return StatusCode(500, $"Error interno del servidor: {e.Message}");
             }
         }
 
@@ -140,9 +140,9 @@ namespace library_utma_backend.Controllers
                     Message = "Usuario registrado exitosamente."
                 });
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+                return StatusCode(500, $"Error interno del servidor: {e.Message}");
             }
         }
     }
