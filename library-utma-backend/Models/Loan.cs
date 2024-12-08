@@ -13,6 +13,9 @@ namespace library_utma_backend.Models
         public required string BookISBN { get; set; }
 
         [Required]
+        public required bool IsReturned { get; set; }
+
+        [Required]
         public required DateTime LoanDate { get; set; }
         public DateTime? ReturnDate { get; set; }
 
