@@ -71,6 +71,14 @@ namespace library_utma_backend.Controllers
 
                 var token = _jwt.GenerateToken(user.Id ,user.Name, user.UserType.Name);
 
+                Response.Cookies.Append("AuthToken", token, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTime.UtcNow.AddHours(12)
+                });
+
                 return Ok(new JsonWebToken { Token = token });
             }
             catch (Exception e)
