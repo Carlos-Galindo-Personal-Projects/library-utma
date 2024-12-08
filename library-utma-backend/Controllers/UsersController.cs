@@ -76,7 +76,8 @@ namespace library_utma_backend.Controllers
                     HttpOnly = true,
                     Secure = true,
                     SameSite = SameSiteMode.Strict,
-                    Expires = DateTime.UtcNow.AddHours(12)
+                    Expires = DateTime.UtcNow.AddHours(12),
+                    Path = "/"
                 });
 
                 return Ok(new JsonWebToken { Token = token });
