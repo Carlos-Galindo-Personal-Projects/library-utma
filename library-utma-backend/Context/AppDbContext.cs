@@ -10,6 +10,8 @@ namespace library_utma_backend.Context
         public required DbSet<Activity> Activity { get; set; }
         public required DbSet<Student> Student { get; set; }
         public required DbSet<Career> Career { get; set; }
+        public required DbSet<Loan> Loan { get; set; }
+        public required DbSet<Book> Book { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,6 +39,17 @@ namespace library_utma_backend.Context
                 .HasForeignKey(a => a.CapturistId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Loan>()
+                .HasOne(l => l.Student)
+                .WithMany(s => s.Loans)
+                .HasForeignKey(l => l.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Loan>()
+                .HasOne(l => l.Book)
+                .WithMany(b => b.Loans)
+                .HasForeignKey(l => l.BookISBN)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
