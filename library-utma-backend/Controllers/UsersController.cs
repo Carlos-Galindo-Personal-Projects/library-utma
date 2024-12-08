@@ -44,7 +44,7 @@ namespace library_utma_backend.Controllers
         /// <response code="500">Error interno del servidor.</response>
         // POST: api/Users/Login
         [HttpPost("Login")]
-        public async Task<ActionResult<JsonWebToken>> Login([FromBody] LoginRequestDTO loginRequest)
+        public async Task<ActionResult<ResponseMessage>> Login([FromBody] LoginRequestDTO loginRequest)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace library_utma_backend.Controllers
                     Path = "/"
                 });
 
-                return Ok(new JsonWebToken { Token = token });
+                return Ok(new ResponseMessage { Message = "Sesión iniciada correctamente" });
             }
             catch (Exception e)
             {
