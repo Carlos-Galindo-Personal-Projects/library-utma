@@ -5,6 +5,7 @@ namespace library_utma_backend.Models
     public class UserType
     {
         public int Id { get; set; }
+
         [Required, MinLength(8), MaxLength(32)]
         public required string Name { get; set; }
 

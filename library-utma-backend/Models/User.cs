@@ -14,7 +14,7 @@ namespace library_utma_backend.Models
         [Required, MaxLength(64)]
         public required string Password { get; set; }
 
-        [Required]
+        [Required, Range(1, int.MaxValue, ErrorMessage = "UserTypeId debe ser un valor positivo.")]
         public required int UserTypeId { get; set; }
 
         public UserType UserType { get; set; }

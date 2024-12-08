@@ -11,6 +11,7 @@ namespace library_utma_backend.Models
 
         [Required, MinLength(24), MaxLength(128)]
         public required string Description { get; set; }
+
         public ICollection<Student> Students { get; set; }
     }
 }
