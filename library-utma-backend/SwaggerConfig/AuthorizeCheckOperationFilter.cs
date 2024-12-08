@@ -28,7 +28,7 @@ namespace library_utma_backend.SwaggerConfig
                                 Reference = new OpenApiReference
                                 {
                                     Type = ReferenceType.SecurityScheme,
-                                    Id = "Bearer"
+                                    Id = "Cookie"
                                 }
                             },
                             new string[] {}
