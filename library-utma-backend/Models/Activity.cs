@@ -13,6 +13,9 @@ namespace library_utma_backend.Models
         public required string Description { get; set; }
 
         [Required]
+        public required bool InsideLibrary { get; set; }
+
+        [Required]
         public required DateTime InitialHour { get; set; }
 
         public DateTime? FinalHour { get; set; }
