@@ -145,5 +145,35 @@ namespace library_utma_backend.Controllers
                 return StatusCode(500, $"Error interno del servidor: {e.Message}");
             }
         }
+
+        // DELETE: api/Users/maintenance
+        [HttpDelete("maintenance")]
+        public async Task<ActionResult<ResponseMessage>> MaintenanceDB()
+        {
+            try
+            {
+                var oneMonthAgo = DateTime.Now.AddMonths(-1);
+
+                var activitiesToDelete = _context.Activity
+                    .Where(a => !a.InsideLibrary && a.FinalHour != null && a.FinalHour < oneMonthAgo);
+
+                var loansToDelete = _context.Loan
+                    .Where(l => l.ReturnDate != null && l.ReturnDate < oneMonthAgo && l.IsReturned == true);
+
+                _context.Activity.RemoveRange(activitiesToDelete);
+                _context.Loan.RemoveRange(loansToDelete);
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new ResponseMessage
+                {
+                    Message = "Base de datos limpiada correctamente."
+                });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Error interno del servidor: {e.Message}");
+            }
+        }
     }
 }
