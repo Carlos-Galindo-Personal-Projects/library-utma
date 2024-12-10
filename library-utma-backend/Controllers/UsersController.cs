@@ -91,7 +91,7 @@ namespace library_utma_backend.Controllers
 
         // POST: api/Users/Logout
         [HttpPost("Logout")]
-        public async Task<ActionResult<ResponseMessage>> Logout()
+        public ActionResult<ResponseMessage> Logout()
         {
             try
             {
