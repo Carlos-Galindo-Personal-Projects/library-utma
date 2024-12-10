@@ -39,7 +39,8 @@ namespace library_utma_backend.Controllers
         /// <param name="loginRequest">Objeto que contiene el email y la contraseña del usuario.</param>
         /// <returns>Un JWT si la autenticación es exitosa.</returns>
         /// <response code="200">JWT generado exitosamente.</response>
-        /// <response code="400">La solicitud es nula o la contraseña es incorrecta.</response>
+        /// <response code="400">La solicitud es nula.</response>
+        /// <response code="401">El email o la contraseña son incorrectos.</response>
         /// <response code="404">El usuario con el email especificado no existe.</response>
         /// <response code="500">Error interno del servidor.</response>
         // POST: api/Users/Login
@@ -59,14 +60,14 @@ namespace library_utma_backend.Controllers
 
                 if (user == null)
                 {
-                    return NotFound($"El usuario con el email {loginRequest.Email} no existe.");
+                    return Unauthorized($"El usuario con el email {loginRequest.Email} no existe.");
                 }
 
                 var checkPassword = _user.VerifyPassword(loginRequest.Password, user.Password);
 
                 if (!checkPassword)
                 {
-                    return BadRequest("La contraseña es incorrecta.");
+                    return Unauthorized("La contraseña es incorrecta.");
                 }
 
                 var token = _jwt.GenerateToken(user.Id ,user.Name, user.UserType.Name);
