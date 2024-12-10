@@ -91,6 +91,7 @@ namespace library_utma_backend.Controllers
 
         // POST: api/Users/Logout
         [HttpPost("Logout")]
+        [AuthMiddleware]
         public ActionResult<ResponseMessage> Logout()
         {
             try
@@ -107,7 +108,6 @@ namespace library_utma_backend.Controllers
             }
             catch (Exception e)
             {
-                // Manejar errores internos del servidor
                 return StatusCode(500, $"Error interno del servidor: {e.Message}");
             }
         }
