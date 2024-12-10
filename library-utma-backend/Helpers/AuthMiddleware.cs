@@ -55,7 +55,7 @@ namespace library_utma_backend.Helpers
                     context.Result = new UnauthorizedObjectResult("Token inválido.");
                     return;
                 }
-                ¿
+
                 var userIdClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "Id")?.Value;
                 var userTypeClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "Utstr")?.Value;
 
