@@ -22,7 +22,6 @@ namespace library_utma_backend.Helpers
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            // Obtener el valor de la cookie "AuthToken"
             var cookie = context.HttpContext.Request.Cookies["AuthToken"];
 
             Console.WriteLine($"Cookie: {cookie}");
@@ -35,7 +34,6 @@ namespace library_utma_backend.Helpers
 
             try
             {
-                // Validar el token
                 var handler = new JwtSecurityTokenHandler();
                 var tokenValidationParameters = new TokenValidationParameters
                 {
@@ -50,7 +48,6 @@ namespace library_utma_backend.Helpers
 
                 handler.ValidateToken(cookie, tokenValidationParameters, out var validatedToken);
 
-                // Extraer el token JWT
                 var jwtToken = validatedToken as JwtSecurityToken;
 
                 if (jwtToken == null)
@@ -58,8 +55,7 @@ namespace library_utma_backend.Helpers
                     context.Result = new UnauthorizedObjectResult("Token inválido.");
                     return;
                 }
-
-                // Validar los claims personalizados
+                ¿
                 var userIdClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "Id")?.Value;
                 var userTypeClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "Utstr")?.Value;
 
@@ -75,7 +71,6 @@ namespace library_utma_backend.Helpers
                     return;
                 }
 
-                // Almacenar información en el contexto
                 context.HttpContext.Items["UserRole"] = userTypeClaim;
                 context.HttpContext.Items["UserId"] = userId;
             }
