@@ -89,6 +89,30 @@ namespace library_utma_backend.Controllers
             }
         }
 
+        // POST: api/Users/Logout
+        [HttpPost("Logout")]
+        public async Task<ActionResult<ResponseMessage>> Logout()
+        {
+            try
+            {
+                Response.Cookies.Append("AuthToken", string.Empty, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTime.UtcNow.AddDays(-1)
+                });
+
+                return Ok(new ResponseMessage { Message = "Sesión cerrada correctamente." });
+            }
+            catch (Exception e)
+            {
+                // Manejar errores internos del servidor
+                return StatusCode(500, $"Error interno del servidor: {e.Message}");
+            }
+        }
+
+
         /// <summary>
         /// Registro de un nuevo usuario.
         /// </summary>
