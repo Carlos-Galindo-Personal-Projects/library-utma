@@ -24,8 +24,6 @@ namespace library_utma_backend.Helpers
         {
             var cookie = context.HttpContext.Request.Cookies["AuthToken"];
 
-            Console.WriteLine($"Cookie: {cookie}");
-
             if (string.IsNullOrWhiteSpace(cookie))
             {
                 context.Result = new UnauthorizedObjectResult("Token no proporcionado.");
