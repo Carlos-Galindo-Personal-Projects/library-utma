@@ -1,13 +1,12 @@
-import { ReactNode } from "react";
+import { FC } from "react";
+import { ChildrenProps } from "@/types/types";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-export default function Layout({ children }: LayoutProps) {
+const Layout: FC<ChildrenProps> = ({ children }: Readonly<ChildrenProps>) => {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       {children}
     </div>
   );
 }
+
+export default Layout;

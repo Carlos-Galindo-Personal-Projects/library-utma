@@ -6,3 +6,12 @@ export interface UserLogin{
 export interface ZodError{
     message: string;
 }
+
+export interface IconProps {
+  IconComponent: React.ElementType;
+  route: string;
+}
+
+export interface ChildrenProps {
+  children: React.ReactNode;
+}

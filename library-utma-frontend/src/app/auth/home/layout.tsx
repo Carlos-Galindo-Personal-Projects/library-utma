@@ -1,12 +1,8 @@
-import { ReactNode } from 'react';
 import Header from './_components/Header';
 import SideBar from './_components/SideBar';
+import { ChildrenProps } from '@/types/types';
 
-interface AuthLayoutProps {
-    children: ReactNode;
-}
-
-export default function AuthLayout({ children }: AuthLayoutProps) {
+const AuthLayout = ({ children }: Readonly<ChildrenProps>) => {
     return (
         <div className="h-screen flex flex-col">
             <Header />
@@ -22,3 +18,4 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
     );
 }
 
+export default AuthLayout;

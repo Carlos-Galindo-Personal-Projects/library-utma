@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Reddit_Sans } from "next/font/google";
 import "./globals.css";
+import { ChildrenProps } from "@/types/types";
 
 const redditSans = Reddit_Sans({
   subsets: ["latin"],
@@ -15,9 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<ChildrenProps>) {
   return (
     <html lang="en">
       <body className={`${redditSans.className} antialiased`}>
