@@ -29,7 +29,7 @@ export default function Header() {
                 <p>
                     Hola: <span className="font-semibold">Admin</span>
                 </p>
-                <UserIcon color={true}/>
+                <UserIcon/>
             </div>
         </div>
     )
