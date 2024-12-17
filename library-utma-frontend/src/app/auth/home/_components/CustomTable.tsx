@@ -2,8 +2,6 @@
 import { CustomTableProps } from '@/types/types';
 import { FC } from 'react';
 
-
-
 const CustomTable: FC<CustomTableProps> = ({ columns, headers, data }) => {
     return (
         <div className="overflow-x-auto shadow-md rounded-lg">
@@ -24,11 +22,10 @@ const CustomTable: FC<CustomTableProps> = ({ columns, headers, data }) => {
                                 <td key={colIndex} className="px-4 py-2 text-left">
                                     {
                                         typeof row[col] === 'boolean' ? (
-                                            row[col] ? 'Yes' : 'No'
+                                            row[col] ? 'Si' : 'No'
                                         ) : (
                                             row[col]
                                         )
-
                                     }
                                 </td>
                             ))}

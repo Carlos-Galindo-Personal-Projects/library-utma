@@ -35,8 +35,17 @@ export interface Book {
   amount: number;
 }
 
+export interface Activity {
+  id: number;
+  studentId: `UTM${number}`;
+  studentName: string;
+  initialHour: string;
+  finalHour?: string;
+  insideLibrary: boolean;
+}
+
 export interface CustomTableProps {
-    columns: (keyof Loan | keyof Book)[];
+    columns: (keyof Loan | keyof Book | keyof Activity)[];
     headers: string[];
-    data: (Loan | Book)[];
+    data: (Loan | Book | Activity)[];
 }
