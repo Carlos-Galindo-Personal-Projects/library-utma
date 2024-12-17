@@ -26,8 +26,17 @@ export interface Loan {
   isReturned: boolean;
 }
 
+export interface Book {
+  isbn: string;
+  title: string;
+  author: string;
+  genre: string;
+  year: number;
+  amount: number;
+}
+
 export interface CustomTableProps {
-    columns: (keyof Loan)[];
+    columns: (keyof Loan | keyof Book)[];
     headers: string[];
-    data: Loan[];
+    data: (Loan | Book)[];
 }
