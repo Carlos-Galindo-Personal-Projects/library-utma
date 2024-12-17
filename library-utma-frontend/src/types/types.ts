@@ -44,8 +44,10 @@ export interface Activity {
   insideLibrary: boolean;
 }
 
+type Item = Loan | Book | Activity;
+
 export interface CustomTableProps {
-    columns: (keyof Loan | keyof Book | keyof Activity)[];
+    columns: (keyof Item)[];
     headers: string[];
-    data: (Loan | Book | Activity)[];
+    data: Item[];
 }
