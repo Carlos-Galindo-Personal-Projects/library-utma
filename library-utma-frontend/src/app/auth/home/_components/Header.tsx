@@ -43,7 +43,7 @@ export default function Header() {
                 <div className="relative">
                     <button
                         onClick={toggleDropdown}
-                        className={`flex items-center justify-center w-10 h-10 rounded-full ${isDropdownOpen ? "bg-[#074d47]" : "hover:bg-[#074d47]"}`}
+                        className={`flex items-center justify-center w-10 h-10 rounded-full ${isDropdownOpen ? "bg-[#072E33]" : "hover:bg-[#072E33]"}`}
                     >
                         <UserIcon isDropdownOpen={isDropdownOpen} />
                     </button>

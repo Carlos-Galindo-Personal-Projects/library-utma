@@ -37,7 +37,7 @@ const Icon: FC<IconProps> = ({ IconComponent, route }) => {
     <div
       onClick={() => router.push(route)}
       className={`flex items-center justify-center cursor-pointer w-11/12 p-2 rounded-md transition-colors duration-300 ${
-        isActive ? "bg-[#074d47]" : "hover:bg-[#074d47]"
+        isActive ? "bg-[#072E33]" : "hover:bg-[#072E33]"
       }`}
     >
       <IconComponent isActive={isActive} />
