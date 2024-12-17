@@ -7,7 +7,7 @@ import { userSchema } from "@/schemas/userSchema";
 import { UserLogin } from "@/types/types";
 import { useRouter } from "next/navigation";
 
-export default function LoginForm(){
+export default function LoginForm() {
 
     const router = useRouter();
 
@@ -15,7 +15,7 @@ export default function LoginForm(){
         resolver: zodResolver(userSchema)
     });
 
-    const onsubmit = (data: UserLogin) => {
+    const onSubmit = (data: UserLogin) => {
         alert("Sesión iniciada");
         console.log(data);
         router.push("/auth/home");
@@ -28,53 +28,44 @@ export default function LoginForm(){
     }
 
     return (
-        <div
-            className="w-1/4 h-5/6 bg-[#0F907C] rounded-lg"
-        >
-            <h2
-                className="text-4xl text-center pt-6 font-bold"
-            >Iniciar sesión</h2>
-            <Image
-                src="/UTMA.svg"
-                alt="Logo"
-                width={150}
-                height={150}
-                className="m-auto my-4"
-            />
-            <form onSubmit={handleSubmit(onsubmit, onError)}>
-                <div
-                    className="w-11/12 m-auto flex flex-col py-2"
-                >
-                    <label htmlFor="email">Correo electrónico</label>
-                    <input
-                        type="email"
-                        id="email"
-                        className="rounded-md h-8 pl-1 text-black"
-                        {...register("email")}
-                    />
-                </div>
-                <div
-                    className="w-11/12 m-auto flex flex-col py-2"
-                >
-                    <label htmlFor="password">Contraseña</label>
-                    <input
-                        type="password"
-                        id="password"
-                        className="rounded-md h-8 pl-1 text-black"
-                        {...register("password")}
-                    />
-                </div>
-                <div
-                    className="w-5/6 m-auto"
-                >
+        <div className="flex justify-center items-center min-h-screen p-4">
+            <div className="w-full max-w-md bg-[#0F907C] rounded-lg p-6 shadow-lg">
+                <h2 className="text-3xl text-center text-white font-bold mb-6">Iniciar sesión</h2>
+                <Image
+                    src="/UTMA.svg"
+                    alt="Logo"
+                    width={150}
+                    height={150}
+                    className="m-auto mb-4"
+                />
+                <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-4">
+                    <div>
+                        <label htmlFor="email" className="text-white text-sm">Correo electrónico</label>
+                        <input
+                            type="email"
+                            id="email"
+                            className="w-full rounded-md h-10 px-3 text-black mt-1"
+                            {...register("email")}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password" className="text-white text-sm">Contraseña</label>
+                        <input
+                            type="password"
+                            id="password"
+                            className="w-full rounded-md h-10 px-3 text-black mt-1"
+                            {...register("password")}
+                        />
+                    </div>
                     <button
-                        className="bg-[#6DA5C0] rounded-md font-bold w-full py-1 my-8"
                         type="submit"
+                        className="w-full bg-[#6DA5C0] rounded-md py-2 text-white font-bold mt-6 hover:bg-[#5d8a99] transition"
                     >
                         Iniciar sesión
                     </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     );
 }
+
