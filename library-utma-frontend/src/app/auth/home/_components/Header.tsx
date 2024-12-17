@@ -21,7 +21,7 @@ export default function Header() {
     }
 
     return (
-        <div className="flex justify-between items-center bg-[#0F907C] text-white px-10">
+        <div className="flex justify-between items-center bg-[#0F907C] text-white px-8 py-1">
             <div className="flex items-center space-x-4">
                 <Link href="/auth/home">
                     <Image

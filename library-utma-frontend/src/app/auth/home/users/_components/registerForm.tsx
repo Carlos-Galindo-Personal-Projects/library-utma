@@ -24,9 +24,9 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-4">
-      <div className="w-full max-w-md bg-[#0F907C] rounded-lg p-4 shadow-lg">
-        <h2 className="text-2xl text-center text-white font-bold mb-4">Registrar</h2>
+    <div className="flex flex-col items-center justify-center my-12">
+      <div className="w-1/3 bg-[#0F907C] rounded-lg shadow-lg">
+        <h2 className="text-2xl text-center text-white font-bold my-4">Registrar</h2>
         <Image
           src="/UTMA.svg"
           alt="Logo"
@@ -34,8 +34,10 @@ export default function RegisterForm() {
           height={120}
           className="m-auto mb-4"
         />
-        <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-3">
-          <div>
+        <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-3 overflow-y-hidden">
+          <div
+            className="mx-4"
+          >
             <label htmlFor="name" className="text-white text-sm">Nombre completo</label>
             <input
               type="text"
@@ -44,7 +46,9 @@ export default function RegisterForm() {
               {...register("name")}
             />
           </div>
-          <div>
+          <div
+            className="mx-4"
+          >
             <label htmlFor="email" className="text-white text-sm">Correo electrónico</label>
             <input
               type="email"
@@ -53,7 +57,9 @@ export default function RegisterForm() {
               {...register("email")}
             />
           </div>
-          <div>
+          <div
+            className="mx-4"
+          >
             <label htmlFor="password" className="text-white text-sm">Contraseña</label>
             <input
               type="password"
@@ -62,7 +68,9 @@ export default function RegisterForm() {
               {...register("password")}
             />
           </div>
-          <div>
+          <div
+            className="mx-4"
+          >
             <label htmlFor="confirmPassword" className="text-white text-sm">Confirmar contraseña</label>
             <input
               type="password"
@@ -71,7 +79,9 @@ export default function RegisterForm() {
               {...register("confirmPassword")}
             />
           </div>
-          <div>
+          <div
+            className="mx-4"
+          >
             <label htmlFor="userTypeId" className="text-white text-sm">Tipo de usuario</label>
             <select
               id="userTypeId"
@@ -80,16 +90,19 @@ export default function RegisterForm() {
                 setValueAs: value => Number(value)
               })}
             >
+              <option value="">Selecciona un tipo de usuario</option>
               <option value="1">Administrador</option>
               <option value="2">Usuario</option>
             </select>
           </div>
-          <button
-            type="submit"
-            className="w-full bg-[#6DA5C0] rounded-md py-2 text-white font-bold mt-4 hover:bg-[#5d8a99] transition"
-          >
-            Registrarse
-          </button>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="w-5/6 bg-[#6DA5C0] rounded-md py-2 text-white font-bold my-4 hover:bg-[#5d8a99] transition"
+            >
+              Registrarse
+            </button>
+          </div>
         </form>
       </div>
     </div>

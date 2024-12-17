@@ -4,9 +4,8 @@ const LoanIcon: FC <{isActive : boolean}> = ({isActive}) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width={60}
-            height={60}
-            // className="icon"
+            width={50}
+            height={50}
             viewBox="0 0 1024 1024"
             className={`cursor-pointer transition-colors duration-150 ${
                 isActive ? "fill-white" : "fill-black hover:fill-gray-300"
