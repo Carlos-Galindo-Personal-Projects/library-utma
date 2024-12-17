@@ -1,36 +1,66 @@
-import Image from "next/image"
-import Link from "next/link"
-import UserIcon from "./UserIcon"
+"use client"
+
+import Image from "next/image";
+import Link from "next/link";
+import UserIcon from "./UserIcon";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
-    return (
-        <div className="flex justify-between items-center h-20 bg-[#0F907C] text-white">
-            <div
-                className="flex items-center"
-            >
-                <Link href="/auth/home">
 
-                        <Image
-                            src="/UTMA.svg"
-                            alt="Logo"
-                            width={70}
-                            height={70}
-                            className="m-4"
-                        />
+    const Router = useRouter();
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+
+    const toggleDropdown = () => setIsDropdownOpen(prev => !prev);
+
+    const handleLogout = () => {
+        alert("Sesión cerrada");
+        setIsDropdownOpen(false);
+        Router.push("/");
+    }
+
+    return (
+        <div className="flex justify-between items-center h-20 bg-[#0F907C] text-white shadow-lg px-6">
+            <div className="flex items-center space-x-4">
+                <Link href="/auth/home">
+                    <Image
+                        src="/UTMA.svg"
+                        alt="Logo"
+                        width={60}
+                        height={60}
+                    />
                 </Link>
-                <h2
-                    className="text-2xl font-semibold"
-                >
+                <h2 className="text-xl font-semibold tracking-wide">
                     Biblioteca UTMA
                 </h2>
             </div>
 
-            <div className="mr-8 flex justify-evenly items-center">
-                <p>
-                    Hola: <span className="font-semibold">Admin</span>
+            <div className="flex items-center space-x-4">
+                <p className="text-sm">
+                    Hola, <span className="font-semibold">Admin</span>
                 </p>
-                <UserIcon/>
+                <div className="relative">
+                    <button
+                        onClick={toggleDropdown}
+                        className="flex items-center justify-center w-10 h-10 rounded-full"
+                    >
+                        <UserIcon isDropdownOpen={isDropdownOpen} />
+                    </button>
+
+                    {/* Dropdown Menu */}
+                    {isDropdownOpen && (
+                        <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-10">
+                            <button
+                                onClick={handleLogout}
+                                className="w-full text-left py-2 px-4 text-red-600 hover:bg-gray-100 transition"
+                            >
+                                Cerrar sesión
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
-    )
+    );
 }
