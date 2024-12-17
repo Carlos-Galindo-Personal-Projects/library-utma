@@ -1,6 +1,6 @@
 import CustomTable from "../_components/CustomTable";
 import { Activity } from "@/types/types";
-import { activities } from "@/mocks/Activities";
+import { activities } from "@/mocks/activities";
 
 export default function EntrancePage() {
 
