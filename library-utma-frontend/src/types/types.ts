@@ -15,3 +15,19 @@ export interface IconProps {
 export interface ChildrenProps {
   children: React.ReactNode;
 }
+
+export interface Loan {
+  id: string;
+  studentId: `UTM${number}`;
+  studentName: string;
+  bookName: string;
+  loanDate: string;
+  returnDate: string;
+  isReturned: boolean;
+}
+
+export interface CustomTableProps {
+    columns: (keyof Loan)[];
+    headers: string[];
+    data: Loan[];
+}
