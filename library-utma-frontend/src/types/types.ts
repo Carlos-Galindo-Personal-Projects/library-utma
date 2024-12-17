@@ -3,6 +3,14 @@ export interface UserLogin{
     password: string;
 }
 
+export interface UserRegister {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  userTypeId: number;
+}
+
 export interface ZodError{
     message: string;
 }
