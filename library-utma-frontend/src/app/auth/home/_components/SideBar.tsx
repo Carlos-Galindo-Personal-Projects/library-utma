@@ -19,7 +19,7 @@ export default function SideBar() {
   ];
 
   return (
-    <aside className="w-20 bg-[#0F907C] h-full flex flex-col justify-evenly items-center py-4">
+    <aside className="bg-[#0F907C] flex flex-col justify-evenly items-center h-full">
       {icons.map(({ IconComponent, route }) => (
         <Icon key={route} IconComponent={IconComponent} route={route} />
       ))}
@@ -36,7 +36,7 @@ const Icon: FC<IconProps> = ({ IconComponent, route }) => {
   return (
     <div
       onClick={() => router.push(route)}
-      className={`flex items-center justify-center cursor-pointer w-11/12 p-2 rounded-md transition-colors duration-300 ${
+      className={`flex items-center justify-center cursor-pointer w-5/6 rounded-md transition-colors duration-300 ${
         isActive ? "bg-[#072E33]" : "hover:bg-[#072E33]"
       }`}
     >
