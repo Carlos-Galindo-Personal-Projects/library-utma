@@ -21,7 +21,7 @@ export default function Header() {
     }
 
     return (
-        <div className="flex justify-between items-center h-20 bg-[#0F907C] text-white shadow-lg px-6">
+        <div className="flex justify-between items-center h-20 bg-[#0F907C] text-white shadow-lg px-3">
             <div className="flex items-center space-x-4">
                 <Link href="/auth/home">
                     <Image
@@ -43,12 +43,11 @@ export default function Header() {
                 <div className="relative">
                     <button
                         onClick={toggleDropdown}
-                        className="flex items-center justify-center w-10 h-10 rounded-full"
+                        className={`flex items-center justify-center w-10 h-10 rounded-full ${isDropdownOpen ? "bg-[#074d47]" : "hover:bg-[#074d47]"}`}
                     >
                         <UserIcon isDropdownOpen={isDropdownOpen} />
                     </button>
 
-                    {/* Dropdown Menu */}
                     {isDropdownOpen && (
                         <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-10">
                             <button
