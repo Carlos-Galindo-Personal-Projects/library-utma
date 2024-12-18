@@ -1,4 +1,3 @@
-
 import { CustomTableProps } from '@/types/types';
 import { FC } from 'react';
 
@@ -38,4 +37,3 @@ const CustomTable: FC<CustomTableProps> = ({ columns, headers, data }) => {
 };
 
 export default CustomTable;
-

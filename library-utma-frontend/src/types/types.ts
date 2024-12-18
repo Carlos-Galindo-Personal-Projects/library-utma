@@ -59,3 +59,7 @@ export interface CustomTableProps {
     headers: string[];
     data: Item[];
 }
+
+export interface SkeletonTableProps {
+  columns: number;
+}
