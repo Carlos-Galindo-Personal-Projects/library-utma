@@ -31,7 +31,7 @@ const Icon: FC<IconProps> = ({ IconComponent, route }) => {
   const pathName = usePathname();
   const router = useRouter();
 
-  const isActive = pathName === route;
+  const isActive = pathName.includes(route);
 
   return (
     <div
