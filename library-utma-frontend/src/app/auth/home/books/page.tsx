@@ -3,6 +3,7 @@ import CustomTable from "../_components/CustomTable";
 import { books } from "@/mocks/books";
 import { Suspense } from "react";
 import SkeletonTable from "../_components/UI/CustomTableSkeleton";
+import Link from "next/link";
 
 export default function BooksPage() {
 
@@ -21,11 +22,13 @@ export default function BooksPage() {
         </h2>
       </div>
       <div>
-        <button
-          className="my-4 px-4 py-2 text-white bg-blue-500 rounded"
-        >
-          Añadir Libro
-        </button>
+        <Link href="/auth/home/books/add">
+          <button
+            className="my-4 px-4 py-2 text-white bg-blue-500 rounded"
+          >
+            Añadir Libro
+          </button>
+        </Link>
       </div>
       <div>
       <Suspense fallback={<SkeletonTable columns={columns.length} />} >
