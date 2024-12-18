@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 const CustomTable: FC<CustomTableProps> = ({ columns, headers, data }) => {
     return (
-        <div className="overflow-x-auto shadow-md rounded-lg">
+        <div className="overflow-x-auto shadow-md rounded-lg mt-4">
             <table className="min-w-full table-auto">
                 <thead className="bg-[#0F907C] text-white">
                     <tr>

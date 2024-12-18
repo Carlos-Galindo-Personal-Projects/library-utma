@@ -9,22 +9,18 @@ export default function LoansPage() {
 
   return (
     <div
-      className="flex flex-col items-center justify-center h-full my-6"
+      className="flex flex-col items-center justify-center h-full my-12"
     >
-      <div>
-        <h2
-          className="text-4xl font-semibold text-center"
-        >
-          Loans Page
-        </h2>
-      </div>
-      <div>
-        <button
-          className="my-4 px-4 py-2 text-white bg-blue-500 rounded"
-        >
-          Add Loan
-        </button>
-      </div>
+      <h2
+        className="text-4xl font-semibold text-center"
+      >
+        Préstamos
+      </h2>
+      <button
+        className="my-4 px-4 py-2 text-white bg-blue-500 rounded"
+      >
+        Registrar Préstamo
+      </button>
       <div>
         <CustomTable columns={columns} headers={headers} data={loans} />
       </div>
