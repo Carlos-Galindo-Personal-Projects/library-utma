@@ -1,6 +1,8 @@
 import CustomTable from "../_components/CustomTable";
 import { Activity } from "@/types/types";
 import { activities } from "@/mocks/activities";
+import { Suspense } from "react";
+import SkeletonTable from "../_components/UI/CustomTableSkeleton";
 
 export default function EntrancePage() {
 
@@ -26,7 +28,9 @@ export default function EntrancePage() {
         </button>
       </div>
       <div>
-        <CustomTable columns={columns} headers={headers} data={activities} />
+        <Suspense fallback={<SkeletonTable columns={columns.length} />} >
+          <CustomTable columns={columns} headers={headers} data={activities} />
+        </Suspense>
       </div>
     </div>
     );
