@@ -1,10 +1,10 @@
 "use client";
 
-import LoanIcon from "./LoanIcon";
-import BookIcon from "./BookIcon";
-import EntranceIcon from "./EntranceIcon";
-import UsersIcon from "./UsersIcon";
-import DatabaseIcon from "./DatabaseIcon";
+import LoanIcon from "./Icons/LoanIcon";
+import BookIcon from "./Icons/BookIcon";
+import EntranceIcon from "./Icons/EntranceIcon";
+import UsersIcon from "./Icons/UsersIcon";
+import DatabaseIcon from "./Icons/DatabaseIcon";
 import { usePathname, useRouter } from "next/navigation";
 import { FC } from "react";
 import { IconProps } from "@/types/types";

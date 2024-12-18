@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import UserIcon from "./UserIcon";
+import UserIcon from "./Icons/UserIcon";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
