@@ -9,11 +9,11 @@ export default function LoansPage() {
 
   return (
     <div
-      className="flex flex-col items-center justify-center h-full"
+      className="flex flex-col items-center justify-center h-full my-6"
     >
       <div>
         <h2
-          className="text-2xl font-semibold text-center"
+          className="text-4xl font-semibold text-center"
         >
           Loans Page
         </h2>
