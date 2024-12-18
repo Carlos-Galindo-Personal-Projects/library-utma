@@ -34,4 +34,3 @@ const SkeletonTable: FC<SkeletonTableProps> = ({ columns }) => {
 };
 
 export default SkeletonTable;
-

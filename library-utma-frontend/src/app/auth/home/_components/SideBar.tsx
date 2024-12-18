@@ -13,7 +13,7 @@ export default function SideBar() {
   const icons = [
     { IconComponent: LoanIcon, route: "/auth/home/loans" },
     { IconComponent: BookIcon, route: "/auth/home/books" },
-    { IconComponent: EntranceIcon, route: "/auth/home/entrance" },
+    { IconComponent: EntranceIcon, route: "/auth/home/entrances" },
     { IconComponent: UsersIcon, route: "/auth/home/users" },
     { IconComponent: DatabaseIcon, route: "/auth/home/database" },
   ];
