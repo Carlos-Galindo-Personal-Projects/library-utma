@@ -12,6 +12,7 @@ namespace library_utma_backend.Context
         public required DbSet<Career> Career { get; set; }
         public required DbSet<Loan> Loan { get; set; }
         public required DbSet<Book> Book { get; set; }
+        public required DbSet<Genre> Genre { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -49,6 +50,12 @@ namespace library_utma_backend.Context
                 .HasOne(l => l.Book)
                 .WithMany(b => b.Loans)
                 .HasForeignKey(l => l.BookISBN)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Book>()
+                .HasOne(b => b.Genre)
+                .WithMany(g => g.Books)
+                .HasForeignKey(b => b.GenreId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

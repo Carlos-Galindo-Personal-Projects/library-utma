@@ -15,8 +15,8 @@ namespace library_utma_backend.DTO
         [Required(ErrorMessage = "El autor es requerido"), MaxLength(64)]
         public required string Author { get; set; }
 
-        [Required(ErrorMessage = "El género es requerido"), MaxLength(32)]
-        public required string Genre { get; set; }
+        [Required(ErrorMessage = "El género es requerido")]
+        public required int GenreId { get; set; }
 
         [Required(ErrorMessage = "El año es requerido"), Range(1900, int.MaxValue, ErrorMessage = "Year debe ser un valor positivo.")]
         public required int Year { get; set; }

@@ -38,7 +38,7 @@ namespace library_utma_backend.Controllers
                     ISBN = bookRequest.ISBN,
                     Title = bookRequest.Title,
                     Author = bookRequest.Author,
-                    Genre = bookRequest.Genre,
+                    GenreId = bookRequest.GenreId,
                     Year = bookRequest.Year,
                     Amount = bookRequest.Amount
                 };
@@ -56,15 +56,15 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Books/summary/{genre}
         [HttpGet("summary/{genre}")]
-        public async Task<ActionResult<IEnumerable<BooksSummaryDTO>>> GetSummaryBooks(string genre)
+        public async Task<ActionResult<IEnumerable<BooksSummaryDTO>>> GetSummaryBooks(int genreId)
         {
             try
             {
                 var query = _context.Book.AsQueryable();
 
-                if (!string.Equals(genre, "All", StringComparison.OrdinalIgnoreCase))
+                if (genreId > 0)
                 {
-                    query = query.Where(b => b.Genre == genre);
+                    query = query.Where(b => b.GenreId == genreId);
                 }
 
                 var books = await query
@@ -73,7 +73,7 @@ namespace library_utma_backend.Controllers
                         ISBN = b.ISBN,
                         Title = b.Title,
                         Author = b.Author,
-                        Genre = b.Genre,
+                        Genre = b.Genre.Name,
                         Year = b.Year,
                         Amount = b.Amount
                     })

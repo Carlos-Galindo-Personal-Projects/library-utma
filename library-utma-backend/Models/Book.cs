@@ -13,8 +13,8 @@ namespace library_utma_backend.Models
         [Required, MaxLength(64)]
         public required string Author { get; set; }
 
-        [Required, MaxLength(32)]
-        public required string Genre { get; set; }
+        [Required, Range(1, int.MaxValue, ErrorMessage = "GenreId debe ser un valor positivo.")]
+        public required int GenreId { get; set; }
 
         [Required, Range(1900, int.MaxValue, ErrorMessage = "Year debe ser un valor positivo.")]
         public required int Year { get; set; }
@@ -23,5 +23,6 @@ namespace library_utma_backend.Models
         public required int Amount { get; set; }
 
         public ICollection<Loan> Loans { get; set; }
+        public Genre Genre { get; set; }
     }
 }
