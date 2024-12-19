@@ -1,7 +1,7 @@
-import { CustomTableProps } from '@/types/types';
+import { ActivitiesTableProps } from '@/types/types';
 import { FC } from 'react';
 
-const CustomTable: FC<CustomTableProps> = ({ columns, headers, data }) => {
+const EntrancesTable: FC<ActivitiesTableProps> = ({ columns, headers, data }) => {
     return (
         <div className="overflow-x-auto shadow-md rounded-lg mt-4">
             <table className="min-w-full table-auto">
@@ -12,6 +12,9 @@ const CustomTable: FC<CustomTableProps> = ({ columns, headers, data }) => {
                                 {header}
                             </th>
                         ))}
+                        <th className='px-4 py-2 text-center'>
+                            Acciones
+                        </th>
                     </tr>
                 </thead>
                 <tbody className="bg-[#05161A] text-white">
@@ -28,6 +31,21 @@ const CustomTable: FC<CustomTableProps> = ({ columns, headers, data }) => {
                                     }
                                 </td>
                             ))}
+                            <td className="px-4 py-2 text-center">
+                                <div className="flex justify-center space-x-2">
+                                    {
+                                        row.insideLibrary ? (
+                                            <button className="text-white bg-blue-500 rounded p-1">
+                                                Marcar Salida
+                                            </button>
+                                        ) : (
+                                            <p>
+                                                No hay acciones disponibles
+                                            </p>
+                                        )
+                                    }
+                                </div>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -36,4 +54,4 @@ const CustomTable: FC<CustomTableProps> = ({ columns, headers, data }) => {
     );
 };
 
-export default CustomTable;
+export default EntrancesTable;

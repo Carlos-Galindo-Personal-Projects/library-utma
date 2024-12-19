@@ -1,5 +1,5 @@
 import { Book } from "@/types/types";
-import CustomTable from "../_components/CustomTable";
+import BooksTable from "./_components/BooksTable";
 import { books } from "@/mocks/books";
 import { Suspense } from "react";
 import SkeletonTable from "../_components/UI/CustomTableSkeleton";
@@ -29,8 +29,8 @@ export default function BooksPage() {
         </Link>
       </div>
       <div className="w-4/5 max-w-fit mx-auto mb-8">
-        <Suspense fallback={<SkeletonTable columns={columns.length} />} >
-          <CustomTable columns={columns} headers={headers} data={books} />
+        <Suspense fallback={<SkeletonTable columns={columns.length + 1} />} >
+          <BooksTable columns={columns} headers={headers} data={books} />
         </Suspense>
       </div>
     </>

@@ -52,12 +52,22 @@ export interface Activity {
   insideLibrary: boolean;
 }
 
-type Item = Loan | Book | Activity;
+export interface BooksTableProps {
+  columns: (keyof Book)[];
+  headers: string[];
+  data: Book[];
+}
 
-export interface CustomTableProps {
-    columns: (keyof Item)[];
-    headers: string[];
-    data: Item[];
+export interface LoansTableProps {
+  columns: (keyof Loan)[];
+  headers: string[];
+  data: Loan[];
+}
+
+export interface ActivitiesTableProps {
+  columns: (keyof Activity)[];
+  headers: string[];
+  data: Activity[];
 }
 
 export interface SkeletonTableProps {

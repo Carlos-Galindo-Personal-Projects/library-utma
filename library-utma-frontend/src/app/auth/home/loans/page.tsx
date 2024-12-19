@@ -1,9 +1,9 @@
 import { loans } from "@/mocks/loans";
-import CustomTable from "../_components/CustomTable";
 import { Loan } from "@/types/types";
 import SkeletonTable from "../_components/UI/CustomTableSkeleton";
 import { Suspense } from "react";
 import Link from "next/link";
+import LoansTable from "./_components/LoansTable";
 
 export default function LoansPage() {
 
@@ -30,7 +30,7 @@ export default function LoansPage() {
       </div>
       <div className="w-4/5 max-w-fit mx-auto mb-8">
         <Suspense fallback={<SkeletonTable columns={columns.length} />} >
-          <CustomTable columns={columns} headers={headers} data={loans} />
+          <LoansTable columns={columns} headers={headers} data={loans} />
         </Suspense>
       </div>
     </>
