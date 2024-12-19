@@ -30,7 +30,7 @@ export interface Loan {
   studentName: string;
   bookName: string;
   loanDate: string;
-  returnDate: string;
+  returnDate?: string;
   isReturned: boolean;
 }
 

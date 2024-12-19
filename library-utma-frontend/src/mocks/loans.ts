@@ -7,7 +7,6 @@ export const loans: Loan[] = [
         studentName: "John Doe",
         bookName: "The Alchemist",
         loanDate: "2021-10-01",
-        returnDate: "2021-10-15",
         isReturned: false
     },
     {
@@ -16,7 +15,6 @@ export const loans: Loan[] = [
         studentName: "Jane Doe",
         bookName: "The Alchemist",
         loanDate: "2021-10-01",
-        returnDate: "2021-10-15",
         isReturned: false
     },
     {
@@ -25,7 +23,6 @@ export const loans: Loan[] = [
         studentName: "John Doe",
         bookName: "The Alchemist",
         loanDate: "2021-10-01",
-        returnDate: "2021-10-15",
         isReturned: false
     },
     {
@@ -34,7 +31,6 @@ export const loans: Loan[] = [
         studentName: "Jane Doe",
         bookName: "The Alchemist",
         loanDate: "2021-10-01",
-        returnDate: "2021-10-15",
         isReturned: false
     },
     {
@@ -43,7 +39,6 @@ export const loans: Loan[] = [
         studentName: "John Doe",
         bookName: "The Alchemist",
         loanDate: "2021-10-01",
-        returnDate: "2021-10-15",
         isReturned: false
     },
     {
@@ -52,7 +47,6 @@ export const loans: Loan[] = [
         studentName: "Jane Doe",
         bookName: "The Alchemist",
         loanDate: "2021-10-01",
-        returnDate: "2021-10-15",
         isReturned: false
     },
     {
@@ -61,7 +55,6 @@ export const loans: Loan[] = [
         studentName: "John Doe",
         bookName: "The Alchemist",
         loanDate: "2021-10-01",
-        returnDate: "2021-10-15",
         isReturned: false
     },
     {
@@ -70,7 +63,6 @@ export const loans: Loan[] = [
         studentName: "Jane Doe",
         bookName: "The Alchemist",
         loanDate: "2021-10-01",
-        returnDate: "2021-10-15",
         isReturned: false
     },
     {
@@ -79,7 +71,6 @@ export const loans: Loan[] = [
         studentName: "John Doe",
         bookName: "The Alchemist",
         loanDate: "2021-10-01",
-        returnDate: "2021-10-15",
         isReturned: false
     },
     {
@@ -88,7 +79,6 @@ export const loans: Loan[] = [
         studentName: "Jane Doe",
         bookName: "The Alchemist",
         loanDate: "2021-10-01",
-        returnDate: "2021-10-15",
         isReturned: false
     }
 ]
