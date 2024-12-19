@@ -35,7 +35,7 @@ export interface Loan {
 }
 
 export interface Book {
-  isbn: string;
+  isbn: `${number}-${number}-${number}-${number}-${number}`;
   title: string;
   author: string;
   genre: string;
