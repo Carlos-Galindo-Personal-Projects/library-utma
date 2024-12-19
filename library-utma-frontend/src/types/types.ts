@@ -63,3 +63,12 @@ export interface CustomTableProps {
 export interface SkeletonTableProps {
   columns: number;
 }
+
+export interface FormBook {
+  isbn: `${number}-${number}-${number}-${number}-${number}`;
+  title: string;
+  author: string;
+  genreId: number;
+  year: number;
+  amount: number;
+}
