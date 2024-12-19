@@ -8,7 +8,7 @@ const CustomTable: FC<CustomTableProps> = ({ columns, headers, data }) => {
                 <thead className="bg-[#0F907C] text-white">
                     <tr>
                         {headers.map((header, index) => (
-                            <th key={index} className="px-4 py-2 text-left">
+                            <th key={index} className="px-4 py-2 text-center">
                                 {header}
                             </th>
                         ))}
@@ -18,7 +18,7 @@ const CustomTable: FC<CustomTableProps> = ({ columns, headers, data }) => {
                     {data.map((row, rowIndex) => (
                         <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-[#072E33]' : 'bg-[#294D61]'} >
                             {columns.map((col, colIndex) => (
-                                <td key={colIndex} className="px-4 py-2 text-left">
+                                <td key={colIndex} className="px-4 py-2 text-center">
                                     {
                                         typeof row[col] === 'boolean' ? (
                                             row[col] ? 'Si' : 'No'

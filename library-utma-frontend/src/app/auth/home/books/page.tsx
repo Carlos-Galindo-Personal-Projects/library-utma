@@ -11,18 +11,16 @@ export default function BooksPage() {
   const headers: string[] = ['ISBN', 'Título', 'Autor', 'Género', 'Año', 'Cantidad'];
 
   return (
-    <div
-      className="flex flex-col items-center justify-center h-full my-12"
-    >
-      <div>
+    <>
+      <div className="max-w-fit mx-auto my-8">
         <h2
           className="text-4xl font-semibold text-center"
         >
           Libros
         </h2>
-      </div>
-      <div>
-        <Link href="/auth/home/books/add">
+        <Link
+          href="/auth/home/books/add"
+        >
           <button
             className="my-4 px-4 py-2 text-white bg-blue-500 rounded"
           >
@@ -30,11 +28,11 @@ export default function BooksPage() {
           </button>
         </Link>
       </div>
-      <div>
-      <Suspense fallback={<SkeletonTable columns={columns.length} />} >
+      <div className="w-4/5 max-w-fit mx-auto mb-8">
+        <Suspense fallback={<SkeletonTable columns={columns.length} />} >
           <CustomTable columns={columns} headers={headers} data={books} />
         </Suspense>
       </div>
-    </div>
+    </>
   );
 }
