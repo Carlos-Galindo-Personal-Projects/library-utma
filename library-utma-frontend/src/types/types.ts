@@ -38,13 +38,17 @@ export interface Book {
   isbn: `${number}-${number}-${number}-${number}-${number}`;
   title: string;
   author: string;
-  genre?: string;
-  genreId?: number;
   year: number;
   amount: number;
 }
 
+export interface BookRecord extends Book {
+  genre: string;
+}
 
+export interface BookForm extends Book {
+  genreId: number;
+}
 
 export interface Activity {
   id: number;
@@ -61,9 +65,9 @@ export interface Genre {
 }
 
 export interface BooksTableProps {
-  columns: (keyof Book)[];
+  columns: (keyof BookRecord)[];
   headers: string[];
-  data: Book[];
+  data: BookRecord[];
 }
 
 export interface NavTableButtonsProps {
