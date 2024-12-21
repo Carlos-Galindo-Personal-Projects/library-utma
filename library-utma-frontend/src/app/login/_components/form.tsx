@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "@/schemas/userSchema";
 import { UserLogin } from "@/types/types";
 import { useRouter } from "next/navigation";
+import axiosInstance from "@/axios/axios";
+import { AxiosError } from "axios";
 
 export default function LoginForm() {
 
@@ -15,10 +17,16 @@ export default function LoginForm() {
         resolver: zodResolver(userSchema)
     });
 
-    const onSubmit = (data: UserLogin) => {
-        alert("Sesión iniciada");
-        console.log(data);
-        router.push("/auth/home");
+    const onSubmit = async (data: UserLogin) => {
+        try {
+            const response = await axiosInstance.post("/Users/Login", data);
+            alert(response.data.message);
+            router.push("/auth/home");
+        } catch (error) {
+            if(error instanceof AxiosError){
+                alert(error.response?.data);
+            }
+        }
     }
 
     const onError = (errors: FieldErrors) => {
