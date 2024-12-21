@@ -52,6 +52,11 @@ export interface Activity {
   insideLibrary: boolean;
 }
 
+export interface Genre {
+  id: number;
+  name: string;
+}
+
 export interface BooksTableProps {
   columns: (keyof Book)[];
   headers: string[];
