@@ -33,6 +33,13 @@ namespace library_utma_backend.Controllers
                     return BadRequest("La solicitud no puede ser nula.");
                 }
 
+                var bookExists = await _context.Book
+                    .AnyAsync(b => b.ISBN == bookRequest.ISBN);
+
+                if (bookExists) {
+                    return Conflict("El libro ya existe.");
+                }
+
                 var book = new Book
                 {
                     ISBN = bookRequest.ISBN,

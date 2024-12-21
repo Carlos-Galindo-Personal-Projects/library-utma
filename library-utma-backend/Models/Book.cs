@@ -4,7 +4,7 @@ namespace library_utma_backend.Models
 {
     public class Book
     {
-        [Key, StringLength(13), Required]
+        [Key, StringLength(17), Required]
         public required string ISBN { get; set; }
 
         [Required, MaxLength(128)]

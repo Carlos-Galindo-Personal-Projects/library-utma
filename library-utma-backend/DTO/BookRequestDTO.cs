@@ -6,7 +6,7 @@ namespace library_utma_backend.DTO
 {
     public class BookRequestDTO
     {
-        [StringLength(13), Required]
+        [StringLength(17), Required]
         public required string ISBN { get; set; }
 
         [Required(ErrorMessage = "El título es requerido"), MaxLength(128)]
