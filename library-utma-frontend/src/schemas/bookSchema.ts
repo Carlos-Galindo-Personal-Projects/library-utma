@@ -10,7 +10,7 @@ export const bookSchema = z.object({
         .min(1, { message: 'El título del libro es requerido' }),
     author: z
         .string()
-        .min(12, { message: 'El autor del libro es requerido' }),
+        .min(8, { message: 'El autor del libro es requerido' }),
     genreId: z
         .number()
         .int()

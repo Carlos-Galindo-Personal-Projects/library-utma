@@ -38,10 +38,13 @@ export interface Book {
   isbn: `${number}-${number}-${number}-${number}-${number}`;
   title: string;
   author: string;
-  genre: string;
+  genre?: string;
+  genreId?: number;
   year: number;
   amount: number;
 }
+
+
 
 export interface Activity {
   id: number;
