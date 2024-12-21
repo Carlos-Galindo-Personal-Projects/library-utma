@@ -58,6 +58,13 @@ export interface BooksTableProps {
   data: Book[];
 }
 
+export interface NavBooksProps {
+    next: boolean;
+    page: number;
+    handlePrevious: () => void;
+    handleNext: () => void;
+}
+
 export interface LoansTableProps {
   columns: (keyof Loan)[];
   headers: string[];
