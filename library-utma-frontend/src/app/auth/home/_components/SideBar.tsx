@@ -5,9 +5,10 @@ import BookIcon from "./Icons/BookIcon";
 import EntranceIcon from "./Icons/EntranceIcon";
 import UsersIcon from "./Icons/UsersIcon";
 import DatabaseIcon from "./Icons/DatabaseIcon";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { FC } from "react";
 import { IconProps } from "@/types/types";
+import Link from "next/link";
 
 export default function SideBar() {
   const icons = [
@@ -29,18 +30,17 @@ export default function SideBar() {
 
 const Icon: FC<IconProps> = ({ IconComponent, route }) => {
   const pathName = usePathname();
-  const router = useRouter();
 
   const isActive = pathName.includes(route);
 
   return (
     <div
-      onClick={() => router.push(route)}
-      className={`flex items-center justify-center cursor-pointer w-2/3 py-1 rounded-md transition-colors duration-300 ${
-        isActive ? "bg-[#072E33]" : "hover:bg-[#072E33]"
-      }`}
+      className={`flex items-center justify-center cursor-pointer w-2/3 py-1 rounded-md transition-colors duration-300 ${isActive ? "bg-[#072E33]" : "hover:bg-[#072E33]"
+        }`}
     >
-      <IconComponent isActive={isActive} />
+      <Link href={route}>
+        <IconComponent isActive={isActive} />
+      </Link>
     </div>
   );
 };

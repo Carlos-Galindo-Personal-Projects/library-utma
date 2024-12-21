@@ -1,6 +1,6 @@
 import { ActivitiesTableProps } from '@/types/types';
 import { FC } from 'react';
-import ExitButton from './ExitButton';
+import EditButton from './EditButton';
 
 const EntrancesTable: FC<ActivitiesTableProps> = ({ columns, headers, data }) => {
     return (
@@ -36,7 +36,7 @@ const EntrancesTable: FC<ActivitiesTableProps> = ({ columns, headers, data }) =>
                                 <div className="flex justify-center space-x-2">
                                     {
                                         row.insideLibrary ? (
-                                            <ExitButton id={Number(row.id)} />
+                                            <EditButton id={Number(row.id)} />
                                         ) : (
                                             <p>
                                                 No hay acciones disponibles

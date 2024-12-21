@@ -13,7 +13,7 @@ const CheckDevolutionButton: FC<{ id: number }> = ({ id }) => {
     }
 
     return (
-        <button className="text-white bg-blue-500 rounded p-1"
+        <button className="text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:ring-2 focus:ring-blue-300 focus:outline-none rounded p-1 transition"
             onClick={handleClick}
         >
             Marcar Devolución
