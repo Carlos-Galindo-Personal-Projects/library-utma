@@ -12,7 +12,7 @@ using library_utma_backend.Context;
 namespace library_utma_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241208001108_InitialMigration")]
+    [Migration("20241221230949_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -47,6 +47,9 @@ namespace library_utma_backend.Migrations
                     b.Property<DateTime>("InitialHour")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("InsideLibrary")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("StudentId")
                         .IsRequired()
                         .HasColumnType("varchar(11)");
@@ -74,10 +77,8 @@ namespace library_utma_backend.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("varchar(64)");
 
-                    b.Property<string>("Genre")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("varchar(32)");
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -88,6 +89,8 @@ namespace library_utma_backend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ISBN");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Book");
                 });
@@ -115,6 +118,24 @@ namespace library_utma_backend.Migrations
                     b.ToTable("Career");
                 });
 
+            modelBuilder.Entity("library_utma_backend.Models.Genre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("varchar(32)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genre");
+                });
+
             modelBuilder.Entity("library_utma_backend.Models.Loan", b =>
                 {
                     b.Property<int>("Id")
@@ -127,6 +148,9 @@ namespace library_utma_backend.Migrations
                         .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("varchar(13)");
+
+                    b.Property<bool>("IsReturned")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("LoanDate")
                         .HasColumnType("datetime(6)");
@@ -244,6 +268,17 @@ namespace library_utma_backend.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("library_utma_backend.Models.Book", b =>
+                {
+                    b.HasOne("library_utma_backend.Models.Genre", "Genre")
+                        .WithMany("Books")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Genre");
+                });
+
             modelBuilder.Entity("library_utma_backend.Models.Loan", b =>
                 {
                     b.HasOne("library_utma_backend.Models.Book", "Book")
@@ -293,6 +328,11 @@ namespace library_utma_backend.Migrations
             modelBuilder.Entity("library_utma_backend.Models.Career", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("library_utma_backend.Models.Genre", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("library_utma_backend.Models.Student", b =>

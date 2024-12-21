@@ -16,27 +16,6 @@ namespace library_utma_backend.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Book",
-                columns: table => new
-                {
-                    ISBN = table.Column<string>(type: "varchar(13)", maxLength: 13, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Title = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Author = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Genre = table.Column<string>(type: "varchar(32)", maxLength: 32, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Year = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Book", x => x.ISBN);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Career",
                 columns: table => new
                 {
@@ -50,6 +29,21 @@ namespace library_utma_backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Career", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Genre",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "varchar(32)", maxLength: 32, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genre", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -93,6 +87,32 @@ namespace library_utma_backend.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Book",
+                columns: table => new
+                {
+                    ISBN = table.Column<string>(type: "varchar(13)", maxLength: 13, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Title = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Author = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GenreId = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Book", x => x.ISBN);
+                    table.ForeignKey(
+                        name: "FK_Book_Genre_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genre",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -128,6 +148,7 @@ namespace library_utma_backend.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     BookISBN = table.Column<string>(type: "varchar(13)", maxLength: 13, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsReturned = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     LoanDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ReturnDate = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
@@ -159,6 +180,7 @@ namespace library_utma_backend.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Description = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    InsideLibrary = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     InitialHour = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     FinalHour = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CapturistId = table.Column<int>(type: "int", nullable: false)
@@ -190,6 +212,11 @@ namespace library_utma_backend.Migrations
                 name: "IX_Activity_StudentId",
                 table: "Activity",
                 column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Book_GenreId",
+                table: "Book",
+                column: "GenreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Loan_BookISBN",
@@ -232,6 +259,9 @@ namespace library_utma_backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserType");
+
+            migrationBuilder.DropTable(
+                name: "Genre");
 
             migrationBuilder.DropTable(
                 name: "Career");
