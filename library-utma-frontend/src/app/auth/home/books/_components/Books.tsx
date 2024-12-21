@@ -5,7 +5,7 @@ import BooksTable from "./BooksTable";
 import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 import { Book } from "@/types/types";
 import { books } from "@/mocks/books";
-import NavBooks from "./NavBooks";
+import NavTableButtons from "../../_components/NavTableButtons";
 
 const Books = () => {
     const columns: (keyof Book)[] = ["isbn", "title", "author", "genre", "year", "amount"];
@@ -36,7 +36,7 @@ const Books = () => {
             {
                 books.length > 0 ? (
                     <>
-                        <NavBooks
+                        <NavTableButtons
                             next={next}
                             page={page}
                             handlePrevious={handlePrevious}

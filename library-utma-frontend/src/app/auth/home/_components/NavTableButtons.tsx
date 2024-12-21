@@ -1,9 +1,9 @@
 "use client";
 
-import { NavBooksProps } from "@/types/types";
+import { NavTableButtonsProps } from "@/types/types";
 import { FC, useEffect } from "react";
 
-const NavBooks: FC<NavBooksProps> = ({ next, page, handlePrevious, handleNext }) => {
+const NavTableButtons: FC<NavTableButtonsProps> = ({ next, page, handlePrevious, handleNext }) => {
 
     useEffect(() => {
         console.log(`Fetching data from page ${page}. Data from ${(page * 10) - 9} to ${page * 10}`);
@@ -36,5 +36,5 @@ const NavBooks: FC<NavBooksProps> = ({ next, page, handlePrevious, handleNext })
     );
 };
 
-export default NavBooks;
+export default NavTableButtons;
 

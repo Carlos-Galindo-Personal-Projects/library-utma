@@ -58,7 +58,7 @@ export interface BooksTableProps {
   data: Book[];
 }
 
-export interface NavBooksProps {
+export interface NavTableButtonsProps {
     next: boolean;
     page: number;
     handlePrevious: () => void;
