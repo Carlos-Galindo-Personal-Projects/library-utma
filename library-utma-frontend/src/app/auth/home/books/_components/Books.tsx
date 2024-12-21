@@ -3,12 +3,12 @@
 import { Suspense, useState } from "react";
 import BooksTable from "./BooksTable";
 import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
-import { Book } from "@/types/types";
+import { BookRecord } from "@/types/types";
 import { books } from "@/mocks/books";
 import NavTableButtons from "../../_components/NavTableButtons";
 
 const Books = () => {
-    const columns: (keyof Book)[] = ["isbn", "title", "author", "genre", "year", "amount"];
+    const columns: (keyof BookRecord)[] = ["isbn", "title", "author", "genre", "year", "amount"];
     const headers: string[] = ["ISBN", "Título", "Autor", "Género", "Año", "Cantidad"];
     const [page, setPage] = useState<number>(1);
     const [next, setNext] = useState<boolean>(true);
