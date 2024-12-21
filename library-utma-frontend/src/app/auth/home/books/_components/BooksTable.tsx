@@ -1,5 +1,6 @@
 import { BooksTableProps } from '@/types/types';
 import { FC } from 'react';
+import DeleteBook from './DeleteBook';
 
 const BooksTable: FC<BooksTableProps> = ({ columns, headers, data }) => {
     return (
@@ -36,9 +37,7 @@ const BooksTable: FC<BooksTableProps> = ({ columns, headers, data }) => {
                                     <button className="text-white bg-blue-500 rounded p-1">
                                         Editar
                                     </button>
-                                    <button className="text-white bg-red-500 rounded p-1">
-                                        Eliminar
-                                    </button>
+                                    <DeleteBook isbn={row.isbn} />
                                 </div>
                             </td>
                         </tr>

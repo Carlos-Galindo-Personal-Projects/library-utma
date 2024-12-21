@@ -1,5 +1,6 @@
 import { LoansTableProps } from '@/types/types';
 import { FC } from 'react';
+import CheckDevolutionButton from './CheckDevolutionButton';
 
 const LoansTable: FC<LoansTableProps> = ({ columns, headers, data }) => {
     return (
@@ -35,9 +36,7 @@ const LoansTable: FC<LoansTableProps> = ({ columns, headers, data }) => {
                                 <div className="flex justify-center">
                                     {
                                         !row.isReturned ? (
-                                            <button className="text-white bg-blue-500 rounded p-1">
-                                                Marcar Devolución
-                                            </button>
+                                            <CheckDevolutionButton id={Number(row.id)} />
                                         ) : (
                                             <p>
                                                 No hay acciones disponibles
