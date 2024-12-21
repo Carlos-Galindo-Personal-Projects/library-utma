@@ -5,7 +5,7 @@ export default function BooksPage() {
 
   return (
     <>
-      <div className="max-w-fit mx-auto my-8">
+      <div className="max-w-fit mx-auto mt-8">
         <h2
           className="text-4xl font-semibold text-center"
         >
@@ -15,7 +15,7 @@ export default function BooksPage() {
           href="/auth/home/books/add"
         >
           <button
-            className="my-4 px-4 py-2 text-white bg-blue-500 rounded"
+            className="my-6 px-4 py-2 text-white bg-blue-500 rounded"
           >
             Añadir Libro
           </button>
