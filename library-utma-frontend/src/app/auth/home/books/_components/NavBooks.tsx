@@ -12,7 +12,9 @@ const NavBooks: FC<NavBooksProps> = ({ next, page, handlePrevious, handleNext })
     return (
         <div className="flex justify-center items-center space-x-8">
             <button
-                className={`text-2xl bg-[#6DA5C0] hover:bg-[#5d8a99] transition rounded-lg px-4 font-semibold ${page === 1 ? "opacity-50 cursor-not-allowed" : ""
+                className={`text-2xl bg-[#6DA5C0] transition rounded-lg px-4 font-semibold ${page === 1
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:bg-[#5d8a99]"
                     }`}
                 onClick={handlePrevious}
                 disabled={page === 1}
@@ -21,7 +23,9 @@ const NavBooks: FC<NavBooksProps> = ({ next, page, handlePrevious, handleNext })
             </button>
 
             <button
-                className={`text-2xl bg-[#6DA5C0] hover:bg-[#5d8a99] transition rounded-lg px-4 font-semibold ${!next ? "opacity-50 cursor-not-allowed" : ""
+                className={`text-2xl bg-[#6DA5C0] transition rounded-lg px-4 font-semibold ${!next
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:bg-[#5d8a99]"
                     }`}
                 onClick={handleNext}
                 disabled={!next}
@@ -33,3 +37,4 @@ const NavBooks: FC<NavBooksProps> = ({ next, page, handlePrevious, handleNext })
 };
 
 export default NavBooks;
+
