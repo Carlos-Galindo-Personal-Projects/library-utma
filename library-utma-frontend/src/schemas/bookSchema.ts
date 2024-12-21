@@ -6,13 +6,15 @@ export const bookSchema = z.object({
         .length(17, { message: 'El ISBN del libro debe tener 17 caracteres' })
         .regex(/^\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1}$/, { message: 'El formato del ISBN no es válido' }),
     title: z
-        .string(),
+        .string()
+        .min(1, { message: 'El título del libro es requerido' }),
     author: z
-        .string(),
+        .string()
+        .min(12, { message: 'El autor del libro es requerido' }),
     genreId: z
         .number()
         .int()
-        .min(1, { message: 'El género del libro debe ser mayor a 0' }),
+        .min(1, { message: 'El género del libro es requerido' }),
     year: z
         .number()
         .int()
