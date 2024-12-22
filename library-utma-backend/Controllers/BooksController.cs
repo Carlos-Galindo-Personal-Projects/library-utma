@@ -9,6 +9,7 @@ using library_utma_backend.Context;
 using library_utma_backend.Models;
 using library_utma_backend.DTO;
 using library_utma_backend.DTO.Books;
+using library_utma_backend.DTO.Genres;
 
 namespace library_utma_backend.Controllers
 {
@@ -179,10 +180,38 @@ namespace library_utma_backend.Controllers
             }
         }
 
-        // GET: api/Books/{title}
-        [HttpGet("{title}")]
-        public async Task<ActionResult<IEnumerable<BookResponseDTO>>>
+        // GET: api/Books
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<BookSelectorRequestDTO>>> GetBooksByTitle(string title)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(title))
+                {
+                    return BadRequest("El título del libro es requerido");
+                }
 
+                var books = await _context.Book
+                    .Where(b => b.Title.Contains(title))
+                    .Select(b => new BookSelectorRequestDTO
+                    {
+                        ISBN = b.ISBN,
+                        Title = b.Title
+                    })
+                    .ToListAsync();
+
+                if (books.Count == 0)
+                {
+                    return NoContent();
+                }
+
+                return Ok(books);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Error interno del servidor: {e.Message}");
+            }
+        }
 
         // PUT: api/Books/{isbn}
         [HttpPut("{isbn}")]
