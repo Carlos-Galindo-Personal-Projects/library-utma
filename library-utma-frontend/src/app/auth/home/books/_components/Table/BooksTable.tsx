@@ -5,7 +5,7 @@ import { BooksTableProps } from '@/types/components';
 
 import { bookHeaders as headers, bookColumns as columns } from '@/utils/tableHeaders';
 
-const BooksTable: FC<BooksTableProps> = ({ data }) => {
+const BooksTable: FC<BooksTableProps> = ({ data, setPage }) => {
     return (
         <div className="overflow-x-auto shadow-md rounded-lg mt-4">
             <table className="min-w-full table-auto">
@@ -40,14 +40,14 @@ const BooksTable: FC<BooksTableProps> = ({ data }) => {
                                     <td className="px-4 py-2 text-center">
                                         <div className="flex justify-center space-x-2">
                                             <EditButton isbn={row.isbn} />
-                                            <DeleteBook isbn={row.isbn} />
+                                            <DeleteBook isbn={row.isbn} setPage={setPage} />
                                         </div>
                                     </td>
                                 </tr>
                             ))) : (
                             <tr>
                                 <td colSpan={columns.length + 1} className="text-center py-4">
-                                    No hay datos
+                                    No hay libros registrados en la base de datos
                                 </td>
                             </tr>
                         )

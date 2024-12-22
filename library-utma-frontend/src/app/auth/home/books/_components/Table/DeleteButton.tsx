@@ -2,15 +2,29 @@
 
 import { FC } from "react"
 import { useRouter } from "next/navigation"
+import { AxiosError } from "axios";
+import axiosInstance from "@/axios/axios";
+import { DeleteBookButtonProps } from "@/types/components";
 
-const DeleteBook: FC<{ isbn: `${number}-${number}-${number}-${number}-${number}` }> = ({ isbn }) => {
+const DeleteBook: FC<DeleteBookButtonProps> = ({ isbn, setPage }) => {
 
     const router = useRouter();
 
-    const handleClick = () => {
+    const handleClick = async () => {
         if(confirm("¿Estás seguro de eliminar este libro?")) {
-            alert(`Eliminando libro con ISBN: ${isbn}`);
-            router.refresh();
+            try {
+                const response = await axiosInstance.delete(`/Books/${isbn}`);
+                alert(response.data.message);
+                setPage(1);
+                localStorage.setItem("pageBook", "1");
+                router.refresh();
+            } catch (error) {
+                if (error instanceof AxiosError) {
+                    alert(error.response?.data)
+                    return
+                }
+                alert("Ha ocurrido un error");
+            }
         }
     }
 
