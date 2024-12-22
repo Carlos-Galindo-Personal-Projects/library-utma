@@ -61,8 +61,8 @@ namespace library_utma_backend.Controllers
             }
         }
 
-        // GET: api/Books/summary/{genre}
-        [HttpGet("summary/{genre}")]
+        // GET: api/Books/summary
+        [HttpGet("summary")]
         public async Task<ActionResult<IEnumerable<BooksSummaryDTO>>> GetSummaryBooks(int genreId)
         {
             try
