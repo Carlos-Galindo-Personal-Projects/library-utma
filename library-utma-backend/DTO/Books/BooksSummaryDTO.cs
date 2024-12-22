@@ -1,4 +1,4 @@
-﻿namespace library_utma_backend.DTO
+﻿namespace library_utma_backend.DTO.Books
 {
     public class BooksSummaryDTO
     {

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using library_utma_backend.Context;
 using library_utma_backend.Models;
 using library_utma_backend.DTO;
+using library_utma_backend.DTO.Books;
 
 namespace library_utma_backend.Controllers
 {
@@ -63,10 +64,16 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Books/summary
         [HttpGet("summary")]
-        public async Task<ActionResult<IEnumerable<BooksSummaryDTO>>> GetSummaryBooks(int genreId)
+        public async Task<ActionResult<BooksSummaryResponseDTO>> GetSummaryBooks(int genreId, int page = 1)
         {
             try
             {
+                if (page < 1)
+                {
+                    return BadRequest("El número de página debe ser mayor o igual a 1.");
+                }
+
+                const int pageSize = 10;
                 var query = _context.Book.AsQueryable();
 
                 if (genreId > 0)
@@ -74,7 +81,14 @@ namespace library_utma_backend.Controllers
                     query = query.Where(b => b.GenreId == genreId);
                 }
 
+                var totalRecords = await query.CountAsync();
+
+                var skip = (page - 1) * pageSize;
+                var hasMore = (skip + pageSize) < totalRecords;
+
                 var books = await query
+                    .Skip(skip)
+                    .Take(pageSize)
                     .Select(b => new BooksSummaryDTO
                     {
                         ISBN = b.ISBN,
@@ -86,18 +100,23 @@ namespace library_utma_backend.Controllers
                     })
                     .ToListAsync();
 
-                if (books.Count <= 0)
+                if (books.Count == 0)
                 {
                     return NoContent();
                 }
 
-                return Ok(books);
+                return Ok(new BooksSummaryResponseDTO
+                {
+                    Data = books,
+                    HasMore = hasMore
+                });
             }
             catch (Exception e)
             {
                 return StatusCode(500, $"Error interno del servidor: {e.Message}");
             }
         }
+
 
         // PUT: api/Books/{isbn}
         [HttpPut("{isbn}")]

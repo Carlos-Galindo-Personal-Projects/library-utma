@@ -2,7 +2,7 @@
 using Microsoft.Build.Framework;
 using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
 
-namespace library_utma_backend.DTO
+namespace library_utma_backend.DTO.Books
 {
     public class BookRequestDTO
     {
