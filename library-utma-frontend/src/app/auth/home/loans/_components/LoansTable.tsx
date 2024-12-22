@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import CheckDevolutionButton from './CheckDevolutionButton';
 import { LoansTableProps } from '@/types/components';
+import { loanHeaders as headers, loanColumns as columns } from '@/utils/tableHeaders';
 
-const LoansTable: FC<LoansTableProps> = ({ columns, headers, data }) => {
+const LoansTable: FC<LoansTableProps> = ({ data }) => {
     return (
         <div className="overflow-x-auto shadow-md rounded-lg mt-4">
             <table className="min-w-full table-auto">

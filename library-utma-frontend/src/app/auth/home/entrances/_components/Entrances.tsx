@@ -3,13 +3,11 @@
 import { Suspense, useState } from "react";
 import EntrancesTable from "./EntrancesTable";
 import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
-import { activities } from "@/mocks/activities";
+import { entrances } from "@/mocks/entrances";
 import NavTableButtons from "../../_components/FiltersTable";
-import { ActivityRecord } from "@/types/responses";
+import { numberColumnsEntrances as columns } from "@/utils/tableHeaders";
 
 const Entrances = () => {
-    const columns: (keyof ActivityRecord)[] = ['studentId', 'studentName', 'initialHour', 'finalHour', 'insideLibrary'];
-  const headers = ['Matrícula', 'Nombre', 'Hora de entrada', 'Hora de salida', 'Dentro de la biblioteca'];
     const [page, setPage] = useState<number>(1);
     const [next, setNext] = useState<boolean>(true);
 
@@ -34,7 +32,7 @@ const Entrances = () => {
     return (
         <>
             {
-                activities.length > 0 ? (
+                entrances.length > 0 ? (
                     <>
                         <NavTableButtons
                             next={next}
@@ -42,8 +40,8 @@ const Entrances = () => {
                             handlePrevious={handlePrevious}
                             handleNext={handleNext}
                         />
-                        <Suspense fallback={<SkeletonTable columns={columns.length} />} >
-                            <EntrancesTable columns={columns} headers={headers} data={activities} />
+                        <Suspense fallback={<SkeletonTable columns={columns + 1} />} >
+                            <EntrancesTable data={entrances} />
                         </Suspense>
                     </>
                 ) : (

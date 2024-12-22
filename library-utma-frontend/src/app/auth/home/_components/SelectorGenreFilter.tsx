@@ -1,9 +1,10 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import axiosInstance from '@/axios/axios';
 import { AxiosError } from 'axios';
 import { Genre } from '@/types/responses';
+import { GenreFilterProps } from '@/types/components';
 
-const SelectorGenreFilter: FC<{genreId: number; setGenreId: Dispatch<SetStateAction<number>>}> = ({genreId, setGenreId}) => {
+const SelectorGenreFilter: FC<GenreFilterProps> = ({genreId, setGenreId}) => {
 
     const [genres, setGenres] = useState<Genre[]>([]);
 

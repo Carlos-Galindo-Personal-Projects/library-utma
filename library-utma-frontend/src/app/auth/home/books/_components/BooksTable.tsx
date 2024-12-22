@@ -3,7 +3,9 @@ import DeleteBook from './DeleteBook';
 import EditButton from './EditButton';
 import { BooksTableProps } from '@/types/components';
 
-const BooksTable: FC<BooksTableProps> = ({ columns, headers, data }) => {
+import { bookHeaders as headers, bookColumns as columns } from '@/utils/tableHeaders';
+
+const BooksTable: FC<BooksTableProps> = ({ data }) => {
     return (
         <div className="overflow-x-auto shadow-md rounded-lg mt-4">
             <table className="min-w-full table-auto">

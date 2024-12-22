@@ -5,11 +5,9 @@ import LoansTable from "./LoansTable"
 import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 import { loans } from "@/mocks/loans";
 import NavTableButtons from "../../_components/FiltersTable";
-import { LoanRecord } from "@/types/responses";
+import { numberColumnsLoans as columns } from "@/utils/tableHeaders";
 
 const Loans = () => {
-    const columns: (keyof LoanRecord)[] = ['studentId', 'studentName', 'bookName', 'loanDate', 'returnDate', 'isReturned'];
-    const headers: string[] = ['Matrícula', 'Nombre', 'Libro', 'Fecha de préstamo', 'Fecha de devolución', 'Devuelto'];
     const [page, setPage] = useState<number>(1);
     const [next, setNext] = useState<boolean>(true);
 
@@ -42,8 +40,8 @@ const Loans = () => {
                             handlePrevious={handlePrevious}
                             handleNext={handleNext}
                         />
-                        <Suspense fallback={<SkeletonTable columns={columns.length} />} >
-                            <LoansTable columns={columns} headers={headers} data={loans} />
+                        <Suspense fallback={<SkeletonTable columns={columns + 1} />} >
+                            <LoansTable data={loans} />
                         </Suspense>
                     </>
                 ) : (

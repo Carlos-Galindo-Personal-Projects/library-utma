@@ -1,48 +1,46 @@
 import { UseFormRegister } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
 import { BookForm } from "./requests";
-import { ActivityRecord, BookRecord, LoanRecord } from "./responses";
+import { EntranceRecord, BookRecord, LoanRecord } from "./responses";
 
 export interface GenreSelectorProps {
-    register: UseFormRegister<BookForm>;
-  }
+  register: UseFormRegister<BookForm>;
+}
 
-  export interface IconProps {
-    IconComponent: React.ElementType;
-    route: string;
-  }
+export interface GenreFilterProps {
+  genreId: number; setGenreId: Dispatch<SetStateAction<number>>
+}
+
+export interface IconProps {
+  IconComponent: React.ElementType;
+  route: string;
+}
 
 export interface ChildrenProps {
-    children: React.ReactNode;
-  }
+  children: React.ReactNode;
+}
 
-  export interface BooksTableProps {
-    columns: (keyof BookRecord)[];
-    headers: string[];
-    data: BookRecord[];
-  }
+export interface BooksTableProps {
+  data: BookRecord[];
+}
 
-  export interface FilterTableProps {
-      next: boolean;
-      page: number;
-      genreId: number;
-      setGenreId: Dispatch<SetStateAction<number>>;
-      handlePrevious: () => void;
-      handleNext: () => void;
-  }
+export interface FilterTableProps {
+  next: boolean;
+  page: number;
+  genreId: number;
+  setGenreId: Dispatch<SetStateAction<number>>;
+  handlePrevious: () => void;
+  handleNext: () => void;
+}
 
-  export interface LoansTableProps {
-    columns: (keyof LoanRecord)[];
-    headers: string[];
-    data: LoanRecord[];
-  }
+export interface LoansTableProps {
+  data: LoanRecord[];
+}
 
-  export interface ActivitiesTableProps {
-    columns: (keyof ActivityRecord)[];
-    headers: string[];
-    data: ActivityRecord[];
-  }
+export interface EntrancesTableProps {
+  data: EntranceRecord[];
+}
 
-  export interface SkeletonTableProps {
-    columns: number;
-  }
+export interface SkeletonTableProps {
+  columns: number;
+}

@@ -1,4 +1,4 @@
-import { Activity, Book } from "./generic";
+import { Entrance, Book } from "./generic";
 
 export interface BookRecord extends Book {
     genre: string;
@@ -20,7 +20,7 @@ export interface LoanRecord {
 }
 
 
-export interface ActivityRecord extends Activity {
+export interface EntranceRecord extends Entrance {
     id: number;
     studentName: string;
     initialHour: string;

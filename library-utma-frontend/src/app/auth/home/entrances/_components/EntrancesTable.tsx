@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import EditButton from './EditButton';
-import { ActivitiesTableProps } from '@/types/components';
+import { EntrancesTableProps } from '@/types/components';
+import { entrancesHeaders as headers, entrancesColumns as columns } from '@/utils/tableHeaders';
 
-const EntrancesTable: FC<ActivitiesTableProps> = ({ columns, headers, data }) => {
+const EntrancesTable: FC<EntrancesTableProps> = ({ data }) => {
     return (
         <div className="overflow-x-auto shadow-md rounded-lg mt-4">
             <table className="min-w-full table-auto">

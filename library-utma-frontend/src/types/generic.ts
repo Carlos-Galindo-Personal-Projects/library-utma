@@ -6,6 +6,6 @@ export interface Book {
   amount: number;
 }
 
-export interface Activity {
+export interface Entrance {
   studentId: `UTM${number}`;
 }
