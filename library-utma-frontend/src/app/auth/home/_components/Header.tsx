@@ -21,6 +21,7 @@ export default function Header() {
                         alt="Logo"
                         width={60}
                         height={60}
+                        priority={true}
                     />
                 </Link>
                 <h2 className="text-xl font-semibold tracking-wide">
