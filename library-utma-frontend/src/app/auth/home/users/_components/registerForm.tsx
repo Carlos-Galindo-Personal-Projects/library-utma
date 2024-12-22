@@ -4,7 +4,7 @@ import { FieldErrors, useForm } from "react-hook-form";
 import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/schemas/registerSchema";
-import { UserRegister } from "@/types/types";
+import { UserRegister } from "@/types/requests";
 
 export default function RegisterForm() {
 

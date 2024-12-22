@@ -1,4 +1,5 @@
-import { BookForm, BookRecord } from "@/types/types";
+import { BookForm } from "@/types/requests";
+import { BookRecord } from "@/types/responses";
 
 export const books: BookRecord[] = [
     {

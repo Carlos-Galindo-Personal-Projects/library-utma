@@ -1,6 +1,6 @@
-import { ActivitiesTableProps } from '@/types/types';
 import { FC } from 'react';
 import EditButton from './EditButton';
+import { ActivitiesTableProps } from '@/types/components';
 
 const EntrancesTable: FC<ActivitiesTableProps> = ({ columns, headers, data }) => {
     return (

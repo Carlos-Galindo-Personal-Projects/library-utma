@@ -1,6 +1,6 @@
-import { Activity } from "@/types/types";
+import { ActivityRecord } from "@/types/responses";
 
-export const activities: Activity[] = [
+export const activities: ActivityRecord[] = [
     {
         id: 1,
         studentId: "UTM1001",

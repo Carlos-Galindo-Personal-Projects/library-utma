@@ -1,6 +1,6 @@
+import { ChildrenProps } from '@/types/components';
 import Header from './_components/Header';
 import SideBar from './_components/SideBar';
-import { ChildrenProps } from '@/types/types';
 
 const AuthLayout = ({ children }: Readonly<ChildrenProps>) => {
     return (

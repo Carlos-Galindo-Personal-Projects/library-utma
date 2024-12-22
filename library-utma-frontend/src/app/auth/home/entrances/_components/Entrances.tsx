@@ -4,11 +4,11 @@ import { Suspense, useState } from "react";
 import EntrancesTable from "./EntrancesTable";
 import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 import { activities } from "@/mocks/activities";
-import NavTableButtons from "../../_components/NavTableButtons";
-import { Activity } from "@/types/types";
+import NavTableButtons from "../../_components/FiltersTable";
+import { ActivityRecord } from "@/types/responses";
 
 const Entrances = () => {
-    const columns: (keyof Activity)[] = ['studentId', 'studentName', 'initialHour', 'finalHour', 'insideLibrary'];
+    const columns: (keyof ActivityRecord)[] = ['studentId', 'studentName', 'initialHour', 'finalHour', 'insideLibrary'];
   const headers = ['Matrícula', 'Nombre', 'Hora de entrada', 'Hora de salida', 'Dentro de la biblioteca'];
     const [page, setPage] = useState<number>(1);
     const [next, setNext] = useState<boolean>(true);

@@ -7,8 +7,8 @@ import UsersIcon from "./Icons/UsersIcon";
 import DatabaseIcon from "./Icons/DatabaseIcon";
 import { usePathname } from "next/navigation";
 import { FC } from "react";
-import { IconProps } from "@/types/types";
 import Link from "next/link";
+import { IconProps } from "@/types/components";
 
 export default function SideBar() {
   const icons = [

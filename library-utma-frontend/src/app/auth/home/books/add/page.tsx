@@ -4,21 +4,21 @@ import Image from "next/image";
 import { FieldErrors, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bookSchema } from "@/schemas/bookSchema";
-import { FormBook } from "@/types/types";
 import GenreSelector from "../_components/GenreSelector";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import axiosInstance from "@/axios/axios";
+import { BookForm } from "@/types/requests";
 
 export default function AddBook() {
 
     const router = useRouter();
 
-    const { register, handleSubmit } = useForm<FormBook>({
+    const { register, handleSubmit } = useForm<BookForm>({
         resolver: zodResolver(bookSchema)
     });
 
-    const onSubmit = async (data: FormBook) => {
+    const onSubmit = async (data: BookForm) => {
         try {
             const response = await axiosInstance.post("/Books", data);
             alert(response.data.message);

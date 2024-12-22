@@ -1,23 +1,23 @@
 "use client"
 import { booksForm } from "@/mocks/books";
 import { bookSchema } from "@/schemas/bookSchema";
-import { BookForm, FormBook } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 
 import { useParams, useRouter } from "next/navigation";
 import { FieldErrors, useForm } from "react-hook-form";
 import { genres } from "@/mocks/genres";
+import { BookForm } from "@/types/requests";
 
 const EditBook = () => {
 
     const router = useRouter();
 
-    const { register, handleSubmit } = useForm<FormBook>({
+    const { register, handleSubmit } = useForm<BookForm>({
         resolver: zodResolver(bookSchema)
     });
 
-    const onSubmit = (data: FormBook) => {
+    const onSubmit = (data: BookForm) => {
         alert(`El libro ${data.title} ha sido actualizado correctamente`);
         router.push("/auth/home/books");
     }

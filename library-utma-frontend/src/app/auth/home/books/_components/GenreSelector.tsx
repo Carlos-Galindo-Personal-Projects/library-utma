@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GenreSelectorProps } from "@/types/types";
 import axiosInstance from "@/axios/axios";
 import { AxiosError } from "axios";
+import { GenreSelectorProps } from "@/types/components";
 
 export default function GenreSelector({ register }: GenreSelectorProps) {
   const [genres, setGenres] = useState<{ id: number; name: string }[]>([]);

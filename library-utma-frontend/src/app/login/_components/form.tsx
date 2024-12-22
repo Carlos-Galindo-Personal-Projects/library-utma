@@ -4,10 +4,10 @@ import { FieldErrors, useForm } from "react-hook-form";
 import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "@/schemas/userSchema";
-import { UserLogin } from "@/types/types";
 import { useRouter } from "next/navigation";
 import axiosInstance from "@/axios/axios";
 import { AxiosError } from "axios";
+import { UserLogin } from "@/types/requests";
 
 export default function LoginForm() {
 

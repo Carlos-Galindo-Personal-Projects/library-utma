@@ -4,11 +4,11 @@ import { Suspense, useState } from "react";
 import LoansTable from "./LoansTable"
 import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 import { loans } from "@/mocks/loans";
-import NavTableButtons from "../../_components/NavTableButtons";
-import { Loan } from "@/types/types";
+import NavTableButtons from "../../_components/FiltersTable";
+import { LoanRecord } from "@/types/responses";
 
 const Loans = () => {
-    const columns: (keyof Loan)[] = ['studentId', 'studentName', 'bookName', 'loanDate', 'returnDate', 'isReturned'];
+    const columns: (keyof LoanRecord)[] = ['studentId', 'studentName', 'bookName', 'loanDate', 'returnDate', 'isReturned'];
     const headers: string[] = ['Matrícula', 'Nombre', 'Libro', 'Fecha de préstamo', 'Fecha de devolución', 'Devuelto'];
     const [page, setPage] = useState<number>(1);
     const [next, setNext] = useState<boolean>(true);

@@ -1,5 +1,5 @@
+import { ChildrenProps } from "@/types/components";
 import { FC } from "react";
-import { ChildrenProps } from "@/types/types";
 
 const Layout: FC<ChildrenProps> = ({ children }: Readonly<ChildrenProps>) => {
   return (

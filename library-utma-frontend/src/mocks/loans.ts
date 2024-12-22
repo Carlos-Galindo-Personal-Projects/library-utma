@@ -1,6 +1,6 @@
-import { Loan } from "@/types/types"
+import { LoanRecord } from "@/types/responses"
 
-export const loans: Loan[] = [
+export const loans: LoanRecord[] = [
     {
         id: "1",
         studentId: "UTM123",

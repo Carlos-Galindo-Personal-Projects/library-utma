@@ -1,6 +1,6 @@
-import { LoansTableProps } from '@/types/types';
 import { FC } from 'react';
 import CheckDevolutionButton from './CheckDevolutionButton';
+import { LoansTableProps } from '@/types/components';
 
 const LoansTable: FC<LoansTableProps> = ({ columns, headers, data }) => {
     return (

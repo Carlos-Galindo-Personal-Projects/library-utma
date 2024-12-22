@@ -1,4 +1,4 @@
-import { SkeletonTableProps } from "@/types/types";
+import { SkeletonTableProps } from "@/types/components";
 import { FC } from "react";
 
 const SkeletonTable: FC<SkeletonTableProps> = ({ columns }) => {
@@ -10,14 +10,14 @@ const SkeletonTable: FC<SkeletonTableProps> = ({ columns }) => {
                         {Array.from({ length: columns }).map((_, index) => (
                             <th
                                 key={index}
-                                className="px-4 py-2 bg-[#0F907C] text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                                className="px-4 py-3 bg-[#0F907C] text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
                             >
                                 <div className="h-4 bg-gray-200 rounded w-24 animate-pulse"></div>
                             </th>
                         ))}
                     </tr>
                 </thead>
-                <tbody className="bg-[#072E33] divide-y divide-[#0F907C]">
+                <tbody className="bg-[#072E33] divide-y divide-[#072E33]">
                     {Array.from({ length: 7 }).map((_, rowIndex) => (
                         <tr key={rowIndex}>
                             {Array.from({ length: columns }).map((_, colIndex) => (
