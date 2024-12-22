@@ -5,17 +5,31 @@ import { FieldErrors, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bookSchema } from "@/schemas/bookSchema";
 import { FormBook } from "@/types/types";
-import { genres } from "@/mocks/genres";
+import GenreSelector from "../_components/GenreSelector";
+import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
+import axiosInstance from "@/axios/axios";
 
 export default function AddBook() {
+
+    const router = useRouter();
 
     const { register, handleSubmit } = useForm<FormBook>({
         resolver: zodResolver(bookSchema)
     });
 
-    const onSubmit = (data: FormBook) => {
-        alert("Libro registrado");
-        console.log(data);
+    const onSubmit = async (data: FormBook) => {
+        try {
+            const response = await axiosInstance.post("/Books", data);
+            alert(response.data.message);
+            router.push("/auth/home/books");
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                alert(error.response?.data);
+                return;
+            }
+            alert("Ha ocurrido un error");
+        }
     }
 
     const onError = (errors: FieldErrors) => {
@@ -69,25 +83,7 @@ export default function AddBook() {
                             {...register("author")}
                         />
                     </div>
-                    <div
-                        className="mx-4"
-                    >
-                        <label htmlFor="genreId" className="text-white text-sm">Género</label>
-                        <select
-                            id="genreId"
-                            className="w-full rounded-md h-8 px-3 text-black mt-1"
-                            {...register("genreId", {
-                                setValueAs: value => Number(value)
-                            })}
-                        >
-                            <option value="">Selecciona un género</option>
-                            {genres.length > 0 ? genres.map(genre => (
-                                <option key={genre.id} value={genre.id}>{genre.name}</option>
-                            )) : (
-                                <option value="">No hay géneros disponibles</option>
-                            )}
-                        </select>
-                    </div>
+                    <GenreSelector register={register} />
                     <div
                         className="mx-4"
                     >
