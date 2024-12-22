@@ -1,14 +1,18 @@
 import { UseFormRegister } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
 import { BookForm } from "./requests";
-import { EntranceRecord, BookRecord, LoanRecord } from "./responses";
+import { EntranceRecord, BookRecord, LoanRecord, Genre } from "./responses";
 
 export interface GenreSelectorProps {
+  genres: Genre[];
   register: UseFormRegister<BookForm>;
+  defaultValue?: number;
 }
 
 export interface GenreFilterProps {
-  genreId: number; setGenreId: Dispatch<SetStateAction<number>>
+  setPage: Dispatch<SetStateAction<number>>;
+  genreId: number;
+  setGenreId: Dispatch<SetStateAction<number>>
 }
 
 export interface IconProps {
@@ -22,13 +26,12 @@ export interface ChildrenProps {
 
 export interface BooksTableProps {
   data: BookRecord[];
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
 export interface FilterTableProps {
   next: boolean;
   page: number;
-  genreId: number;
-  setGenreId: Dispatch<SetStateAction<number>>;
   handlePrevious: () => void;
   handleNext: () => void;
 }
@@ -43,4 +46,18 @@ export interface EntrancesTableProps {
 
 export interface SkeletonTableProps {
   columns: number;
+}
+
+export interface DynamicPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export interface DeleteBookButtonProps {
+  isbn: `${number}-${number}-${number}-${number}-${number}`;
+  setPage: Dispatch<SetStateAction<number>>
+}
+
+export interface EditBookFormProps {
+  book: BookForm;
+  genres: Genre[]
 }
