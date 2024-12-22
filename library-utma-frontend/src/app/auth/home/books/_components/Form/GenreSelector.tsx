@@ -1,27 +1,7 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import axiosInstance from "@/axios/axios";
-import { AxiosError } from "axios";
 import { GenreSelectorProps } from "@/types/components";
+import { FC } from "react";
 
-export default function GenreSelector({ register }: GenreSelectorProps) {
-  const [genres, setGenres] = useState<{ id: number; name: string }[]>([]);
-
-  useEffect(() => {
-    const fetchGenres = async () => {
-      try {
-        const response = await axiosInstance.get("/Genres");
-        setGenres(response.data);
-      } catch (error) {
-        if(error instanceof AxiosError) {
-          alert(error.response?.data);
-        }
-      }
-    };
-
-    fetchGenres();
-  }, []);
+const GenreSelector: FC<GenreSelectorProps> = ({ register, defaultValue, genres }) => {
 
   return (
     <div className="mx-4">
@@ -31,6 +11,7 @@ export default function GenreSelector({ register }: GenreSelectorProps) {
       <select
         id="genreId"
         className="w-full rounded-md h-8 px-3 text-black mt-1"
+        defaultValue={defaultValue}
         {...register("genreId", {
           setValueAs: (value) => Number(value),
         })}
@@ -49,3 +30,5 @@ export default function GenreSelector({ register }: GenreSelectorProps) {
     </div>
   );
 }
+
+export default GenreSelector;
