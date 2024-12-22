@@ -9,6 +9,7 @@ using library_utma_backend.Context;
 using library_utma_backend.Models;
 using library_utma_backend.DTO;
 using library_utma_backend.DTO.Books;
+using library_utma_backend.DTO.Forms;
 
 namespace library_utma_backend.Controllers
 {
@@ -37,7 +38,8 @@ namespace library_utma_backend.Controllers
                 var bookExists = await _context.Book
                     .AnyAsync(b => b.ISBN == bookRequest.ISBN);
 
-                if (bookExists) {
+                if (bookExists)
+                {
                     return Conflict("El libro ya existe.");
                 }
 
@@ -107,9 +109,70 @@ namespace library_utma_backend.Controllers
 
                 return Ok(new BooksSummaryResponseDTO
                 {
-                    Data = books,
+                    Books = books,
                     HasMore = hasMore
                 });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Error interno del servidor: {e.Message}");
+            }
+        }
+
+        // GET: api/Books/{isbn}
+        [HttpGet("{isbn}")]
+        public async Task<ActionResult<FormResponseDTO>> GetBookByISBN(string isbn)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(isbn))
+                {
+                    return BadRequest("El ISBN no puede ser nulo o vacío.");
+                }
+
+                var book = await _context.Book
+                    .Where(b => b.ISBN == isbn)
+                    .Select(b => new BookResponseDTO
+                    {
+                        ISBN = b.ISBN,
+                        Title = b.Title,
+                        Author = b.Author,
+                        GenreId = b.GenreId,
+                        Year = b.Year,
+                        Amount = b.Amount
+                    })
+                    .FirstOrDefaultAsync();
+
+                if (book == null)
+                {
+                    return NotFound("El libro especificado no existe.");
+                }
+
+                var genres = await _context.Genre
+                    .Select(g => new GenresResponseDTO
+                    {
+                        Id = g.Id,
+                        Name = g.Name
+                    })
+                    .ToListAsync();
+
+                var response = new FormResponseDTO
+                {
+                    Book = book,
+                    Genres = genres
+                };
+
+                if (book == null)
+                {
+                    return NotFound("El libro especificado no existe.");
+                }
+
+                if (genres.Count == 0)
+                {
+                    return NoContent();
+                }
+
+                return Ok(response);
             }
             catch (Exception e)
             {
@@ -120,7 +183,7 @@ namespace library_utma_backend.Controllers
 
         // PUT: api/Books/{isbn}
         [HttpPut("{isbn}")]
-        public async Task<ActionResult<ResponseMessage>> UpdateBookAmount(string isbn, [FromBody] BookAmountRequestDTO amountRequest)
+        public async Task<ActionResult<ResponseMessage>> UpdateBookAmount(string isbn, [FromBody] BookUpdateRequestDTO updatedBookReequest)
         {
             try
             {
@@ -130,7 +193,7 @@ namespace library_utma_backend.Controllers
                     return BadRequest("El ISBN no puede ser nulo o vacío.");
                 }
 
-                if (amountRequest == null)
+                if (updatedBookReequest == null)
                 {
                     return BadRequest("La solicitud no puede ser nula.");
                 }
@@ -143,12 +206,49 @@ namespace library_utma_backend.Controllers
                     return NotFound("El libro especificado no existe.");
                 }
 
-                book.Amount = amountRequest.Amount;
+                book.Amount = updatedBookReequest.Amount;
+                book.Author = updatedBookReequest.Author;
+                book.GenreId = updatedBookReequest.GenreId;
+                book.Title = updatedBookReequest.Title;
+                book.Year = updatedBookReequest.Year;
 
                 _context.Entry(book).Property(b => b.Amount).IsModified = true;
+                _context.Entry(book).Property(b => b.Author).IsModified = true;
+                _context.Entry(book).Property(b => b.GenreId).IsModified = true;
+                _context.Entry(book).Property(b => b.Title).IsModified = true;
+                _context.Entry(book).Property(b => b.Year).IsModified = true;
                 await _context.SaveChangesAsync();
 
                 return Ok(new ResponseMessage { Message = "Libro actualizado correctamente." });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Error interno del servidor: {e.Message}");
+            }
+        }
+
+        // DELETE: api/Books/{isbn}
+        [HttpDelete("{isbn}")]
+        public async Task<ActionResult<ResponseMessage>> DeleteBook(string isbn)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(isbn))
+                {
+                    return BadRequest("El ISBN no puede ser nulo o vacío.");
+                }
+                var book = await _context.Book
+                    .FirstOrDefaultAsync(b => b.ISBN == isbn);
+
+                if (book == null)
+                {
+                    return NotFound("El libro especificado no existe.");
+                }
+
+                _context.Book.Remove(book);
+                await _context.SaveChangesAsync();
+
+                return Ok(new ResponseMessage { Message = "Libro eliminado correctamente." });
             }
             catch (Exception e)
             {
