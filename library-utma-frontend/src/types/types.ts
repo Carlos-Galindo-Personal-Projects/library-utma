@@ -1,3 +1,5 @@
+import { UseFormRegister } from "react-hook-form";
+
 export interface UserLogin{
     email: string;
     password: string;
@@ -100,4 +102,8 @@ export interface FormBook {
   genreId: number;
   year: number;
   amount: number;
+}
+
+export interface GenreSelectorProps {
+  register: UseFormRegister<FormBook>;
 }
