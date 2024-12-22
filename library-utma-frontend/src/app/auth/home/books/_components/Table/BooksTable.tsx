@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import DeleteBook from './DeleteBook';
+import DeleteBook from './DeleteButton';
 import EditButton from './EditButton';
 import { BooksTableProps } from '@/types/components';
 

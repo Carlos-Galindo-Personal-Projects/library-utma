@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import LoansTable from "./LoansTable"
+import LoansTable from "./Table/LoansTable"
 import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 import { loans } from "@/mocks/loans";
 import NavTableButtons from "../../_components/FiltersTable";

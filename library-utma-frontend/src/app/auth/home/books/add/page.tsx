@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FieldErrors, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bookSchema } from "@/schemas/bookSchema";
-import GenreSelector from "../_components/GenreSelector";
+import GenreSelector from "../_components/Form/GenreSelector";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import axiosInstance from "@/axios/axios";

@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import SelectorGenreFilter from "./SelectorGenreFilter";
+import SelectorGenreFilter from "../books/_components/Table/SelectorGenreFilter";
 import { FilterTableProps } from "@/types/components";
 
 const FiltersTable: FC<FilterTableProps> = ({ next, page, genreId, setGenreId, handlePrevious, handleNext }) => {

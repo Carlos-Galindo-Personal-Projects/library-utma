@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import EntrancesTable from "./EntrancesTable";
+import EntrancesTable from "./Table/EntrancesTable";
 import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 import { entrances } from "@/mocks/entrances";
 import NavTableButtons from "../../_components/FiltersTable";
