@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using library_utma_backend.Context;
 using library_utma_backend.Models;
 using library_utma_backend.DTO;
+using library_utma_backend.DTO.Loans;
 
 namespace library_utma_backend.Controllers
 {

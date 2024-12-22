@@ -9,7 +9,6 @@ using library_utma_backend.Context;
 using library_utma_backend.Models;
 using library_utma_backend.DTO;
 using library_utma_backend.DTO.Books;
-using library_utma_backend.DTO.Forms;
 
 namespace library_utma_backend.Controllers
 {
@@ -179,6 +178,10 @@ namespace library_utma_backend.Controllers
                 return StatusCode(500, $"Error interno del servidor: {e.Message}");
             }
         }
+
+        // GET: api/Books/{title}
+        [HttpGet("{title}")]
+        public async Task<ActionResult<IEnumerable<BookResponseDTO>>>
 
 
         // PUT: api/Books/{isbn}

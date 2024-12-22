@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace library_utma_backend.DTO
+namespace library_utma_backend.DTO.Activities
 {
     public class ActivityRequestDTO
     {

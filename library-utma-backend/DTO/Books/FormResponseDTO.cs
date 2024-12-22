@@ -7,8 +7,5 @@ namespace library_utma_backend.DTO.Forms
         public required BookResponseDTO Book { get; set; }
         public required List<GenresResponseDTO> Genres { get; set; }
     }
-
-
-
 }
 
