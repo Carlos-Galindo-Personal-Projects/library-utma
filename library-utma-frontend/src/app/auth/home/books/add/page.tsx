@@ -9,10 +9,31 @@ import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import axiosInstance from "@/axios/axios";
 import { BookForm } from "@/types/requests";
+import { useEffect, useState } from "react";
+import { Genre } from "@/types/responses";
 
 export default function AddBook() {
 
     const router = useRouter();
+
+    const [genres, setGenres] = useState<Genre[]>([]);
+
+    useEffect(() => {
+        async function fetchGenres() {
+            try {
+                const response = await axiosInstance.get("/Genres");
+                setGenres(response.data);
+            } catch (error) {
+                if (error instanceof AxiosError) {
+                    alert(error.response?.data);
+                    return;
+                }
+                alert("Ha ocurrido un error");
+            }
+        }
+
+        fetchGenres();
+    }, []);
 
     const { register, handleSubmit } = useForm<BookForm>({
         resolver: zodResolver(bookSchema)
@@ -83,7 +104,7 @@ export default function AddBook() {
                             {...register("author")}
                         />
                     </div>
-                    <GenreSelector register={register} />
+                    <GenreSelector register={register} genres={genres} />
                     <div
                         className="mx-4"
                     >
