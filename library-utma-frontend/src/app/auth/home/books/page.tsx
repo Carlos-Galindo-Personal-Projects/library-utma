@@ -1,5 +1,8 @@
 import Link from "next/link";
 import Books from "./_components/Books";
+import { Suspense } from "react";
+import SkeletonTable from "../_components/UI/CustomTableSkeleton";
+import { numberColumnsBooks as columns } from "@/utils/tableHeaders";
 
 export default function BooksPage() {
 
@@ -22,7 +25,9 @@ export default function BooksPage() {
         </Link>
       </div>
       <div className="w-4/5 max-w-fit mx-auto mb-8">
-        <Books />
+        <Suspense fallback={<SkeletonTable columns={columns + 1} />}>
+          <Books />
+        </ Suspense>
       </div>
     </>
   );

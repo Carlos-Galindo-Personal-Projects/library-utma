@@ -1,25 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import BooksTable from "./BooksTable";
-import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
+import BooksTable from "./Table/BooksTable";
 import NavTableButtons from "../../_components/FiltersTable";
 import { AxiosError } from "axios";
 import axiosInstance from "@/axios/axios";
 import { BookRecord } from "@/types/responses";
-import { numberColumnsBooks as columns } from "@/utils/tableHeaders";
+import SelectorGenreFilter from "./Table/SelectorGenreFilter";
 
 const Books = () => {
 
     const [books, setBooks] = useState<BookRecord[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [genreId, setGenreId] = useState<number>(0);
+    const [genreId, setGenreId] = useState<number>(Number(localStorage.getItem("genreId")) || 0);
     const [page, setPage] = useState<number>(Number(localStorage.getItem("pageBook")) || 1);
     const [next, setNext] = useState<boolean>(false);
 
     useEffect(() => {
         async function fetchBooks() {
-            setLoading(true);
             try {
                 const response = await axiosInstance.get("/Books/summary", {
                     params: {
@@ -27,7 +24,7 @@ const Books = () => {
                         genreId: genreId,
                     },
                 });
-                setBooks(response.data.data);
+                setBooks(response.data.books);
                 setNext(response.data.hasMore);
             } catch (error) {
                 if (error instanceof AxiosError) {
@@ -35,9 +32,6 @@ const Books = () => {
                     return
                 }
                 alert("Ha ocurrido un error");
-
-            } finally {
-                setLoading(false);
             }
         }
 
@@ -63,23 +57,21 @@ const Books = () => {
 
     return (
         <>
+            <SelectorGenreFilter
+                genreId={genreId}
+                setGenreId={setGenreId}
+                setPage={setPage}
+            />
             <NavTableButtons
                 next={next}
                 page={page}
-                setGenreId={setGenreId}
-                genreId={genreId}
                 handlePrevious={handlePrevious}
                 handleNext={handleNext}
             />
-            {
-                loading ? (
-                    <SkeletonTable columns={columns + 1} />
-                ) : (
-                    <BooksTable
-                        data={books}
-                    />
-                )
-            }
+            <BooksTable
+                data={books}
+                setPage={setPage}
+            />
         </>
     );
 };
