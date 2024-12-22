@@ -10,7 +10,7 @@ using library_utma_backend.Models;
 using library_utma_backend.Helpers;
 using Microsoft.AspNetCore.Identity.Data;
 using library_utma_backend.DTO;
-using library_utma_backend.DTO.Forms;
+using library_utma_backend.DTO.User;
 
 namespace library_utma_backend.Controllers
 {

@@ -9,6 +9,7 @@ using library_utma_backend.Context;
 using library_utma_backend.Models;
 using library_utma_backend.DTO;
 using System.Security.Cryptography.X509Certificates;
+using library_utma_backend.DTO.Activities;
 
 namespace library_utma_backend.Controllers
 {
