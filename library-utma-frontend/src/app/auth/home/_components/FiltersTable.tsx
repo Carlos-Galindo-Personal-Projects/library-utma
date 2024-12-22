@@ -1,14 +1,12 @@
 "use client";
 
 import { FC } from "react";
-import SelectorGenreFilter from "../books/_components/Table/SelectorGenreFilter";
 import { FilterTableProps } from "@/types/components";
 
-const FiltersTable: FC<FilterTableProps> = ({ next, page, genreId, setGenreId, handlePrevious, handleNext }) => {
+const FiltersTable: FC<FilterTableProps> = ({ next, page, handlePrevious, handleNext }) => {
 
     return (
         <>
-            <SelectorGenreFilter genreId={genreId} setGenreId={setGenreId} />
             <div className="flex justify-center items-center space-x-8">
                 <button
                     className={`text-2xl bg-[#6DA5C0] transition rounded-lg px-4 font-semibold ${page === 1
