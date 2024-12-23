@@ -35,7 +35,7 @@ namespace library_utma_backend.Controllers
                 }
 
                 var students = await _context.Student
-                    .Where(s => s.Name.Contains(id))
+                    .Where(s => s.Id.Contains(id))
                     .Select(s => new StudentSelectorRequestDTO
                     {
                         Id = s.Id,
