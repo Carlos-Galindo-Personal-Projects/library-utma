@@ -27,3 +27,13 @@ export interface EntranceRecord extends Entrance {
     finalHour?: string;
     insideLibrary: boolean;
 }
+
+export interface BookSelector {
+    isbn: `${number}-${number}-${number}-${number}-${number}`;
+    title: string;
+}
+
+export interface StudentSelector {
+    id: `UTM${number}`;
+    name: string;
+}
