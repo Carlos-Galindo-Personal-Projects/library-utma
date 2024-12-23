@@ -78,7 +78,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Loans
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LoanSummaryResponseDTO>>> GetLoans(int page = 1)
+        public async Task<ActionResult<LoanSummaryResponseDTO>> GetLoans(int page = 1)
         {
             try
             {
