@@ -12,7 +12,7 @@ namespace library_utma_backend.DTO.Loans
         [Required, MinLength(16), MaxLength(64)]
         public required string StudentName { get; set; }
 
-        [Required, StringLength(13)]
+        [Required, StringLength(17)]
         public required string BookISBN { get; set; }
 
         [Required, MaxLength(128)]

@@ -9,7 +9,7 @@ namespace library_utma_backend.Models
         [Required, StringLength(11, MinimumLength = 11)]
         public required string StudentId { get; set; }
 
-        [Required, StringLength(13)]
+        [Required, StringLength(17)]
         public required string BookISBN { get; set; }
 
         [Required]

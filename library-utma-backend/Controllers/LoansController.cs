@@ -41,7 +41,7 @@ namespace library_utma_backend.Controllers
                     return NotFound("Estudiante no encontrado.");
                 }
 
-                var book = await _context.Book.FirstOrDefaultAsync(b => b.ISBN == loanRequest.BookISBN);
+                var book = await _context.Book.FirstOrDefaultAsync(b => b.ISBN == loanRequest.BookIsbn);
 
                 if (book == null)
                 {
@@ -60,7 +60,7 @@ namespace library_utma_backend.Controllers
                 var loan = new Loan
                 {
                     StudentId = loanRequest.StudentId,
-                    BookISBN = loanRequest.BookISBN,
+                    BookISBN = loanRequest.BookIsbn,
                     IsReturned = false,
                     LoanDate = DateTime.Now
                 };
@@ -133,11 +133,22 @@ namespace library_utma_backend.Controllers
                     return Conflict("El préstamo ya ha sido devuelto.");
                 }
 
+                var book = await _context.Book
+                    .FirstOrDefaultAsync(b => b.ISBN == loan.BookISBN);
+
+                if (book == null)
+                {
+                    return NotFound("El libro no existe en la base de datos");
+                }
+
+                book.Amount++;
+
                 loan.IsReturned = true;
                 loan.ReturnDate = DateTime.Now;
 
                 _context.Entry(loan).Property(l => l.IsReturned).IsModified = true;
                 _context.Entry(loan).Property(l => l.ReturnDate).IsModified = true;
+                _context.Entry(book).Property(b => b.Amount).IsModified = true;
 
                 await _context.SaveChangesAsync();
 
