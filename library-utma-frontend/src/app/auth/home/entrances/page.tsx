@@ -1,5 +1,8 @@
 import Entrances from "./_components/Entrances";
 import Link from "next/link";
+import { numberColumnsEntrances as columns } from "@/utils/tableHeaders";
+import { Suspense } from "react";
+import SkeletonTable from "../_components/UI/CustomTableSkeleton";
 
 export default function EntrancePage() {
 
@@ -17,7 +20,9 @@ export default function EntrancePage() {
       </div>
 
       <div className="w-4/5 max-w-fit mx-auto mb-8">
-        <Entrances />
+        <Suspense fallback={<SkeletonTable columns={columns + 1} />}>
+          <Entrances />
+        </Suspense>
       </div>
     </>
   );

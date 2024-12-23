@@ -31,26 +31,18 @@ const Entrances = () => {
 
     return (
         <>
-            {
-                entrances.length > 0 ? (
-                    <>
-                        <NavTableButtons
-                            next={next}
-                            page={page}
-                            handlePrevious={handlePrevious}
-                            handleNext={handleNext}
-                        />
-                        <Suspense fallback={<SkeletonTable columns={columns + 1} />} >
-                            <EntrancesTable data={entrances} />
-                        </Suspense>
-                    </>
-                ) : (
-                    <div className="flex justify-center items-center h-48">
-                        <p className="text-2xl font-semibold text-gray-500">No hay préstamos registrados</p>
-                    </div>
-                )
 
-            }
+            <NavTableButtons
+                next={next}
+                page={page}
+                handlePrevious={handlePrevious}
+                handleNext={handleNext}
+            />
+            <Suspense fallback={<SkeletonTable columns={columns + 1} />} >
+                <EntrancesTable data={entrances} />
+            </Suspense>
+
+
         </>
     );
 };

@@ -1,7 +1,7 @@
 import { UseFormRegister } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
-import { BookForm } from "./requests";
-import { EntranceRecord, BookRecord, LoanRecord, Genre } from "./responses";
+import { BookForm, EntranceForm } from "./requests";
+import { EntranceRecord, BookRecord, LoanRecord, Genre, StudentSelector } from "./responses";
 
 export interface GenreSelectorProps {
   genres: Genre[];
@@ -66,4 +66,9 @@ export interface EditBookFormProps {
 export interface EditLoanButtonProps {
   id: number;
   setPage: Dispatch<SetStateAction<number>>
+}
+
+export interface StudentSelectorProps {
+  register: UseFormRegister<EntranceForm>;
+  studentOptions: StudentSelector[]
 }

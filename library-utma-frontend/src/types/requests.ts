@@ -25,3 +25,8 @@ export interface LoanForm {
     studentId: `UTM${number}`;
     bookIsbn: `${number}-${number}-${number}-${number}-${number}`;
 }
+
+export interface EntranceForm {
+    studentId: `UTM${number}`;
+    description: string;
+}
