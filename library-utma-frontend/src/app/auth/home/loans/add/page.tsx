@@ -5,11 +5,29 @@ import { useState } from "react";
 import InputBook from "../_components/Form/InputBook";
 import { BookSelector, StudentSelector } from "@/types/responses";
 import InputStudent from "../_components/Form/InputStudent";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loanSchema } from "@/schemas/loanSchema";
+import { LoanForm } from "@/types/requests";
+import { FieldErrors, useForm } from "react-hook-form";
 
 export default function AddLoan() {
 
   const [bookOptions, setBookOptions] = useState<BookSelector[]>([]);
   const [studentOptions, setStudentOptions] = useState<StudentSelector[]>([]);
+
+  const { register, handleSubmit } = useForm<LoanForm>({
+    resolver: zodResolver(loanSchema)
+  })
+
+  const onSuccess = (data: LoanForm) => {
+    console.log(data);
+  }
+
+  const onError = (errors: FieldErrors) => {
+    Object.keys(errors).forEach(key => {
+        alert(errors[key]?.message);
+    });
+}
 
   return (
     <div className="flex flex-col items-center justify-center my-12">
@@ -22,7 +40,7 @@ export default function AddLoan() {
           height={120}
           className="m-auto mb-4"
         />
-        <form className="space-y-3 overflow-y-hidden">
+        <form className="space-y-3 overflow-y-hidden" onSubmit={handleSubmit(onSuccess, onError)}>
           <div
             className="mx-4"
           >
@@ -33,6 +51,7 @@ export default function AddLoan() {
             <select
               id="studentId"
               className="w-full rounded-md h-8 px-3 text-black mt-1"
+              {...register("studentId")}
             >
               {
                 studentOptions.length > 0 ? (
@@ -52,13 +71,14 @@ export default function AddLoan() {
           <div
             className="mx-4"
           >
-            <label htmlFor="bookISBN" className="text-white text-sm">Libro</label>
+            <label htmlFor="bookIsbn" className="text-white text-sm">Libro</label>
             <InputBook
               setBookOptions={setBookOptions}
             />
             <select
-              id="bookISBN"
+              id="bookIsbn"
               className="w-full rounded-md h-8 px-3 text-black mt-1"
+              {...register("bookIsbn")}
             >
               {
                 bookOptions.length > 0 ? (
