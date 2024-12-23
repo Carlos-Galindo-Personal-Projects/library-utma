@@ -116,34 +116,57 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Activities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ActiveActivitiesResponseDTO>>> GetActiveActivities()
+        public async Task<ActionResult<ActivitiesRecordResponseDTO>> GetActivitiesFilterByActivity(bool isInside, int page = 1)
         {
             try
             {
-                var activeActivities = await _context.Activity
-                    .Where(a => a.InsideLibrary == true)
+                if (page < 1)
+                {
+                    return BadRequest("El número de página debe ser mayor o igual a 1.");
+                }
+
+                const int pageSize = 10;
+                var query = _context.Activity.AsQueryable();
+
+                var filteredQuery = query.Where(a => a.InsideLibrary == isInside);
+
+                var totalRecords = await filteredQuery.CountAsync();
+
+                var skip = (page - 1) * pageSize;
+                var hasMore = (skip + pageSize) < totalRecords;
+
+                var activeActivities = await filteredQuery
                     .Include(a => a.Student)
-                    .Select(a => new ActiveActivitiesResponseDTO
+                    .Skip(skip)
+                    .Take(pageSize)
+                    .Select(a => new ActivityRecordDTO
                     {
                         Id = a.Id,
                         StudentId = a.StudentId,
                         StudentName = a.Student.Name,
                         Description = a.Description,
-                        InitialHour = a.InitialHour
+                        InitialHour = a.InitialHour,
+                        FinalHour = a.FinalHour,
+                        InsideLibrary = a.InsideLibrary
                     })
                     .ToListAsync();
 
-                if (activeActivities.Count <= 0)
+                if (activeActivities.Count == 0)
                 {
                     return NoContent();
                 }
 
-                return Ok(activeActivities);
+                return Ok(new ActivitiesRecordResponseDTO
+                {
+                    Activities = activeActivities,
+                    HasMore = hasMore
+                });
             }
             catch (Exception e)
             {
                 return StatusCode(500, $"Error interno del servidor: {e.Message}");
             }
         }
+
     }
 }
