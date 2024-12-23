@@ -22,7 +22,7 @@ export default function LoansPage() {
         </Link>
       </div>
       <div className="w-4/5 max-w-fit mx-auto mb-8">
-        <Loans />
+          <Loans />
       </div>
     </>
   );

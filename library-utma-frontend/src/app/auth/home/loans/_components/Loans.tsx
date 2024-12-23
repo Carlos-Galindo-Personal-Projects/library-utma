@@ -1,20 +1,46 @@
-"use client";
+'use client'
 
-import { Suspense, useState } from "react";
+import {  useEffect, useState } from "react";
 import LoansTable from "./Table/LoansTable"
-import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
-import { loans } from "@/mocks/loans";
 import NavTableButtons from "../../_components/FiltersTable";
-import { numberColumnsLoans as columns } from "@/utils/tableHeaders";
+import { LoanRecord } from "@/types/responses";
+import axiosInstance from "@/axios/axios";
+import { AxiosError } from "axios";
 
 const Loans = () => {
-    const [page, setPage] = useState<number>(1);
-    const [next, setNext] = useState<boolean>(true);
+
+    const [loans, setLoans] = useState<LoanRecord[]>([]);
+    const [page, setPage] = useState<number>(Number(localStorage.getItem("pageLoan")) || 1);
+    const [next, setNext] = useState<boolean>(false);
+
+    useEffect(() => {
+        async function fetchBooks() {
+            try {
+                const response = await axiosInstance.get("/Loans", {
+                    params: {
+                        page
+                    },
+                });
+                setLoans(response.data.loans);
+                setNext(response.data.hasMore);
+            } catch (error) {
+                if (error instanceof AxiosError) {
+                    alert(error.response?.data)
+                    return
+                }
+                alert("Ha ocurrido un error");
+            }
+        }
+
+        fetchBooks();
+    }, [page]);
 
     const handlePrevious = () => {
         if (page > 1) {
-            setPage((prev) => prev - 1);
+            const newPage = page - 1;
+            setPage(newPage);
             setNext(true);
+            localStorage.setItem("pageLoan", newPage.toString());
         }
     };
 
@@ -22,36 +48,24 @@ const Loans = () => {
         if (next) {
             const newPage = page + 1;
             setPage(newPage);
-
-            if (newPage === 5) {
-                setNext(false);
-            }
+            localStorage.setItem("pageLoan", newPage.toString());
         }
     };
 
     return (
         <>
-            {
-                loans.length > 0 ? (
-                    <>
-                        <NavTableButtons
-                            next={next}
-                            page={page}
-                            handlePrevious={handlePrevious}
-                            handleNext={handleNext}
-                        />
-                        <Suspense fallback={<SkeletonTable columns={columns + 1} />} >
-                            <LoansTable data={loans} />
-                        </Suspense>
-                    </>
-                ) : (
-                    <div className="flex justify-center items-center h-48">
-                        <p className="text-2xl font-semibold text-gray-500">No hay préstamos registrados</p>
-                    </div>
-                )
-
-            }
+            <NavTableButtons
+                next={next}
+                page={page}
+                handlePrevious={handlePrevious}
+                handleNext={handleNext}
+            />
+            <LoansTable
+                data={loans}
+                setPage={setPage}
+            />
         </>
+
     );
 };
 
