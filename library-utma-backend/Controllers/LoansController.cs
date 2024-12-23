@@ -78,37 +78,58 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Loans
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LoanSummaryDTO>>> GetLoans()
+        public async Task<ActionResult<IEnumerable<LoanSummaryResponseDTO>>> GetLoans(int page = 1)
         {
             try
             {
-                var loans = await _context.Loan
+                if (page < 1)
+                {
+                    return BadRequest("El número de página debe ser mayor o igual a 1.");
+                }
+
+                const int pageSize = 10;
+                var query = _context.Loan.AsQueryable();
+
+                var filteredQuery = query.Where(l => !l.IsReturned);
+                
+                var totalRecords = await filteredQuery.CountAsync();
+
+                var skip = (page - 1) * pageSize;
+                var hasMore = (skip + pageSize) < totalRecords;
+
+                var loans = await filteredQuery
                     .Include(l => l.Student)
                     .Include(l => l.Book)
-                    .Where(l => !l.IsReturned)
+                    .Skip(skip)
+                    .Take(pageSize)
                     .Select(l => new LoanSummaryDTO
                     {
                         Id = l.Id,
                         StudentId = l.StudentId,
                         StudentName = l.Student.Name,
-                        BookISBN = l.BookISBN,
+                        BookIsbn = l.BookISBN,
                         BookName = l.Book.Title,
                         LoanDate = l.LoanDate
                     })
                     .ToListAsync();
 
-                if (loans.Count <= 0)
+                if (loans.Count == 0)
                 {
                     return NoContent();
                 }
 
-                return Ok(loans);
+                return Ok(new LoanSummaryResponseDTO
+                {
+                    Loans = loans,
+                    HasMore = hasMore
+                });
             }
             catch (Exception e)
             {
                 return StatusCode(500, $"Error interno del servidor: {e.Message}");
             }
         }
+
 
         // PUT: api/Loans/{id}
         [HttpPut("{id}")]
