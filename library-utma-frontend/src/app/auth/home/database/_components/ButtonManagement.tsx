@@ -1,10 +1,27 @@
 "use client"
 
+import axiosInstance from "@/axios/axios";
+import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+
 const ButtonManagement = () => {
 
-    const handleClick = () => {
+    const router = useRouter();
+
+    const handleClick = async () => {
         if(confirm("¿Estás seguro de querer eliminar estos datos?")){
-            alert("Datos eliminados correctamente");
+            try {
+                const response = await axiosInstance.delete("/Users/maintenance");
+                console.log(response.data);
+                alert(response.data.message);
+                router.refresh();
+            } catch (error) {
+                if (error instanceof AxiosError) {
+                    alert(error.response?.data);
+                    return;
+                }
+                alert("Ha ocurrido un error");
+            }
         }
     }
 

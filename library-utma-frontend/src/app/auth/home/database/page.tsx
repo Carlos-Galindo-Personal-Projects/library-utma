@@ -12,10 +12,10 @@ export default function DatabasePage() {
                 </p>
                 <ul className="list-disc list-inside space-y-2">
                     <li>
-                        Se eliminarán las entradas y salidas cuya fecha de salida haya excedido un mes.
+                        Se eliminarán las entradas y salidas cuya fecha de salida haya excedido cuatro meses.
                     </li>
                     <li>
-                        Se eliminarán los préstamos de libros que ya han sido devueltos y cuya fecha de devolución haya superado un mes.
+                        Se eliminarán los préstamos de libros que ya han sido devueltos y cuya fecha de devolución haya superado cuatro meses.
                     </li>
                 </ul>
                 <div className="mt-6">
