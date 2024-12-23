@@ -5,16 +5,30 @@ import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/schemas/registerSchema";
 import { UserRegister } from "@/types/requests";
+import { AxiosError } from "axios";
+import axiosInstance from "@/axios/axios";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
+
+  const router = useRouter();
 
   const { register, handleSubmit } = useForm<UserRegister>({
     resolver: zodResolver(registerSchema)
   });
 
-  const onSubmit = (data: UserRegister) => {
-    alert("Usuario registrado");
-    console.log(data);
+  const onSubmit = async (data: UserRegister) => {
+    try {
+      const response = await axiosInstance.post("/Users/Register", data);
+      alert(response.data.message);
+      router.push("/auth/home");
+    } catch (error) {
+      if (error instanceof AxiosError){
+        alert(error.response?.data);
+        return;
+      }
+      alert("Ha ocurrido un error");
+    }
   }
 
   const onError = (errors: FieldErrors) => {
