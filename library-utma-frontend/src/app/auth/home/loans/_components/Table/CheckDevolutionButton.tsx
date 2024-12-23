@@ -2,14 +2,28 @@
 
 import { FC } from "react"
 import { useRouter } from "next/navigation"
+import { EditLoanButtonProps } from "@/types/components";
+import axiosInstance from "@/axios/axios";
+import { AxiosError } from "axios";
 
-const CheckDevolutionButton: FC<{ id: number }> = ({ id }) => {
+const CheckDevolutionButton: FC<EditLoanButtonProps> = ({ id, setPage }) => {
 
     const router = useRouter();
 
-    const handleClick = () => {
-        alert(`Devolución marcada para el préstamo con ID: ${id}`);
-        router.refresh();
+    const handleClick = async () => {
+        try {
+            const response = await axiosInstance.put(`/Loans/${id}`);
+            alert(response.data.message);
+            setPage(1);
+            localStorage.setItem("pageLoan", "1");
+            router.refresh();
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                alert(error.response?.data)
+                return
+            }
+            alert("Ha ocurrido un error");
+        }
     }
 
     return (
