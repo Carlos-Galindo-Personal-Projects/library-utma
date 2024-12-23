@@ -114,8 +114,8 @@ namespace library_utma_backend.Controllers
             }
         }
 
-        // GET: api/Activities/Active-Activities
-        [HttpGet("Active-Activities")]
+        // GET: api/Activities
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<ActiveActivitiesResponseDTO>>> GetActiveActivities()
         {
             try
