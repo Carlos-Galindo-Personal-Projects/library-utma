@@ -20,34 +20,46 @@ const EntrancesTable: FC<EntrancesTableProps> = ({ data }) => {
                     </tr>
                 </thead>
                 <tbody className="bg-[#05161A] text-white">
-                    {data.map((row, rowIndex) => (
-                        <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-[#072E33]' : 'bg-[#294D61]'} >
-                            {columns.map((col, colIndex) => (
-                                <td key={colIndex} className="px-4 py-2 text-center">
-                                    {
-                                        typeof row[col] === 'boolean' ? (
-                                            row[col] ? 'Si' : 'No'
-                                        ) : (
-                                            row[col]
-                                        )
-                                    }
-                                </td>
-                            ))}
-                            <td className="px-4 py-2 text-center">
-                                <div className="flex justify-center space-x-2">
-                                    {
-                                        row.insideLibrary ? (
-                                            <EditButton id={Number(row.id)} />
-                                        ) : (
-                                            <p>
-                                                No hay acciones disponibles
-                                            </p>
-                                        )
-                                    }
-                                </div>
-                            </td>
-                        </tr>
-                    ))}
+                    {
+                        data && data.length > 0 ? (
+                            data.map((row, rowIndex) => (
+                                <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-[#072E33]' : 'bg-[#294D61]'} >
+                                    {columns.map((col, colIndex) => (
+                                        <td key={colIndex} className="px-4 py-2 text-center">
+                                            {
+                                                col === 'insideLibrary' ? (
+                                                    row[col] ? 'Si' : 'No'
+                                                ) : typeof row[col] === 'boolean' ? (
+                                                    row[col] ? 'Si' : 'No'
+                                                ) : (
+                                                    row[col] || '-'
+                                                )
+                                            }
+                                        </td>
+                                    ))}
+                                    <td className="px-4 py-2 text-center">
+                                        <div className="flex justify-center space-x-2">
+                                            {
+                                                row.insideLibrary ? (
+                                                    <EditButton id={Number(row.id)} />
+                                                ) : (
+                                                    <p>
+                                                        No hay acciones disponibles
+                                                    </p>
+                                                )
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            )))
+                            : (
+                                <tr>
+                                    <td colSpan={columns.length + 1} className="text-center py-4" >
+                                        No hay registros de actividad en la base de datos
+                                    </td>
+                                </tr>
+                            )
+                    }
                 </tbody>
             </table>
         </div>

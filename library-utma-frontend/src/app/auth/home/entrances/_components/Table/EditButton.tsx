@@ -2,14 +2,25 @@
 
 import { FC } from "react"
 import { useRouter } from "next/navigation"
+import { AxiosError } from "axios";
+import axiosInstance from "@/axios/axios";
 
 const ExitButton: FC<{ id: number }> = ({ id }) => {
 
     const router = useRouter();
 
-    const handleClick = () => {
-        alert(`Salida marcada para la actividad con ID: ${id}`);
-        router.refresh();
+    const handleClick = async () => {
+        try {
+            const response = await axiosInstance.put(`/Activities/${id}`);
+            alert(response.data.message);
+            router.refresh();
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                alert(error.response?.data);
+                return;
+            }
+            alert("Ha ocurrido un error");
+        }
     }
 
     return (
