@@ -30,7 +30,6 @@ export default function AddLoan() {
       alert(response.data.message);
       router.push("/auth/home/loans");
     } catch (error) {
-      console.log(error);
       if (error instanceof AxiosError){
         alert(error.response?.data);
         return;

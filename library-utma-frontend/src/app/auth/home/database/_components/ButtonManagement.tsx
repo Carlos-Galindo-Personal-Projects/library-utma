@@ -12,7 +12,6 @@ const ButtonManagement = () => {
         if(confirm("¿Estás seguro de querer eliminar estos datos?")){
             try {
                 const response = await axiosInstance.delete("/Users/maintenance");
-                console.log(response.data);
                 alert(response.data.message);
                 router.refresh();
             } catch (error) {

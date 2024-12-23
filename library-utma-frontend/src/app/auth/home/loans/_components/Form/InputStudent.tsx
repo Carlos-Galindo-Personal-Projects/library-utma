@@ -23,7 +23,6 @@ const InputStudent: FC<{ setStudentOptions: Dispatch<SetStateAction<StudentSelec
         );
         setStudentOptions(response.data);
       } catch (error) {
-        console.error(error);
         if (error instanceof AxiosError) {
           alert(error.response?.data);
           return;

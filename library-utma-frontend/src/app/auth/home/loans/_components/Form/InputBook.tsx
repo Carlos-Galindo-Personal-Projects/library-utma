@@ -23,7 +23,6 @@ const InputBook: FC<{ setBookOptions: Dispatch<SetStateAction<BookSelector[]>> }
         );
         setBookOptions(response.data);
       } catch (error) {
-        console.error(error);
         if (error instanceof AxiosError) {
           alert(error.response?.data);
           return;

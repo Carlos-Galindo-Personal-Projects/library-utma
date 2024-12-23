@@ -29,7 +29,6 @@ export default function AddEntrance() {
             alert(response.data.message);
             router.push("/auth/home/entrances");
         } catch (error) {
-            console.log(error);
             if (error instanceof AxiosError) {
                 alert(error.response?.data);
                 return;

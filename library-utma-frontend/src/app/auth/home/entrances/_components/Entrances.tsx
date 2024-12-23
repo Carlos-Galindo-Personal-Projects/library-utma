@@ -28,7 +28,6 @@ const Entrances = () => {
                         isInside
                     }
                 });
-                console.log(response.data.activities);
                 setEntrances(response.data.activities);
                 setNext(response.data.hasMore);
             } catch (error) {
