@@ -9,8 +9,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loanSchema } from "@/schemas/loanSchema";
 import { LoanForm } from "@/types/requests";
 import { FieldErrors, useForm } from "react-hook-form";
+import { AxiosError } from "axios";
+import axiosInstance from "@/axios/axios";
+import { useRouter } from "next/navigation";
 
 export default function AddLoan() {
+
+  const router = useRouter();
 
   const [bookOptions, setBookOptions] = useState<BookSelector[]>([]);
   const [studentOptions, setStudentOptions] = useState<StudentSelector[]>([]);
@@ -19,8 +24,19 @@ export default function AddLoan() {
     resolver: zodResolver(loanSchema)
   })
 
-  const onSuccess = (data: LoanForm) => {
-    console.log(data);
+  const onSuccess = async (data: LoanForm) => {
+    try {
+      const response = await axiosInstance.post("/Loans", data);
+      alert(response.data.message);
+      router.push("/auth/home/loans");
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError){
+        alert(error.response?.data);
+        return;
+      }
+      alert("Ha ocurrido un error");
+    }
   }
 
   const onError = (errors: FieldErrors) => {
