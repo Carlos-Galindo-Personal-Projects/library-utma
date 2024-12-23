@@ -38,6 +38,7 @@ export interface FilterTableProps {
 
 export interface LoansTableProps {
   data: LoanRecord[];
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
 export interface EntrancesTableProps {
@@ -60,4 +61,9 @@ export interface DeleteBookButtonProps {
 export interface EditBookFormProps {
   book: BookForm;
   genres: Genre[]
+}
+
+export interface EditLoanButtonProps {
+  id: number;
+  setPage: Dispatch<SetStateAction<number>>
 }
