@@ -18,7 +18,7 @@ export const bookSchema = z.object({
     year: z
         .number()
         .int()
-        .min(1800, { message: 'El año de publicación debe ser mayor a 1800' }),
+        .min(1900, { message: 'El año de publicación debe ser mayor a 1900' }),
     amount: z
         .number()
         .int()
