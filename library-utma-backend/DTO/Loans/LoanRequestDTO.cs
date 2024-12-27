@@ -6,7 +6,7 @@ namespace library_utma_backend.DTO.Loans
     {
 
         [Required(ErrorMessage = "La matrícula del estudiante es requerida")]
-        [StringLength(11, ErrorMessage = "La matrícula del estudiante debe tener 11 caracteres"]
+        [StringLength(11, ErrorMessage = "La matrícula del estudiante debe tener 11 caracteres")]
         public required string StudentId { get; set; }
 
         [Required(ErrorMessage = "El ISBN del libro es requerido")]
