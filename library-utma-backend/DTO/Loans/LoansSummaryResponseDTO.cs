@@ -2,7 +2,7 @@
 
 namespace library_utma_backend.DTO.Loans
 {
-    public class LoanSummaryResponseDTO
+    public class LoansSummaryResponseDTO
     {
         public required List<LoanSummaryDTO> Loans { get; set; }
         public required bool HasMore { get; set; }
