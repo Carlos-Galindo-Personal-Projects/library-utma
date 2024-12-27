@@ -9,7 +9,7 @@ namespace library_utma_backend.DTO.User
         [MaxLength(64, ErrorMessage = "El nombre debe tener máximo 64 caracteres")]
         public required string Name { get; set; }
 
-        [Range(1, 3, ErrorMessage = "El tipo de usuario debe estar entre 1 y 3")]
+        [Range(1, int.MaxValue, ErrorMessage = "El tipo de usuario debe ser un valor positivo")]
         [Required(ErrorMessage = "El tipo de usuario es requerido")]
         public required int UserTypeId { get; set; }
     }
