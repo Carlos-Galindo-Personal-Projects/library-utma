@@ -78,7 +78,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Loans
         [HttpGet]
-        public async Task<ActionResult<LoanSummaryResponseDTO>> GetLoans(int page = 1)
+        public async Task<ActionResult<LoansSummaryResponseDTO>> GetLoans(int page = 1)
         {
             try
             {
@@ -118,7 +118,7 @@ namespace library_utma_backend.Controllers
                     return NoContent();
                 }
 
-                return Ok(new LoanSummaryResponseDTO
+                return Ok(new LoansSummaryResponseDTO
                 {
                     Loans = loans,
                     HasMore = hasMore
