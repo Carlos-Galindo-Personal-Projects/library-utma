@@ -10,6 +10,8 @@ using library_utma_backend.Models;
 using library_utma_backend.DTO;
 using library_utma_backend.DTO.Books;
 using library_utma_backend.DTO.Genres;
+using library_utma_backend.DTO.Books.Requests;
+using library_utma_backend.DTO.Books.Responses;
 
 namespace library_utma_backend.Controllers
 {
@@ -26,7 +28,7 @@ namespace library_utma_backend.Controllers
 
         // POST: api/Books
         [HttpPost]
-        public async Task<ActionResult<ResponseMessage>> AddBook([FromBody] BookRequestDTO bookRequest)
+        public async Task<ActionResult<ResponseMessage>> AddBook([FromBody] DTO.Books.Requests.BookRequestDTO bookRequest)
         {
             try
             {
@@ -182,7 +184,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Books
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BookSelectorRequestDTO>>> GetBooksByTitle(string title)
+        public async Task<ActionResult<IEnumerable<BookSelectorResponseDTO>>> GetBooksByTitle(string title)
         {
             try
             {
@@ -193,7 +195,7 @@ namespace library_utma_backend.Controllers
 
                 var books = await _context.Book
                     .Where(b => b.Title.Contains(title))
-                    .Select(b => new BookSelectorRequestDTO
+                    .Select(b => new BookSelectorResponseDTO
                     {
                         ISBN = b.ISBN,
                         Title = b.Title
