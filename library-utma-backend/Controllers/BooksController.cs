@@ -91,7 +91,7 @@ namespace library_utma_backend.Controllers
                 var books = await query
                     .Skip(skip)
                     .Take(pageSize)
-                    .Select(b => new BooksSummaryDTO
+                    .Select(b => new BookSummaryDTO
                     {
                         ISBN = b.ISBN,
                         Title = b.Title,

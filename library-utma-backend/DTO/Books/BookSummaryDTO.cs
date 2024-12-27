@@ -1,6 +1,6 @@
 ﻿namespace library_utma_backend.DTO.Books
 {
-    public class BooksSummaryDTO
+    public class BookSummaryDTO
     {
         public required string ISBN { get; set; }
         public required string Title { get; set; }

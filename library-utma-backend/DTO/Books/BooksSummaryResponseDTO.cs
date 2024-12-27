@@ -2,7 +2,7 @@
 {
     public class BooksSummaryResponseDTO
     {
-        public required List<BooksSummaryDTO> Books { get; set; }
+        public required List<BookSummaryDTO> Books { get; set; }
         public required bool HasMore { get; set; }
     }
 }
