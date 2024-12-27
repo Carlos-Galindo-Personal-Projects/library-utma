@@ -25,7 +25,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Students
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StudentSelectorRequestDTO>>> GetStudent(string id)
+        public async Task<ActionResult<IEnumerable<StudentResponseDTO>>> GetStudent(string id)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace library_utma_backend.Controllers
 
                 var students = await _context.Student
                     .Where(s => s.Id.Contains(id))
-                    .Select(s => new StudentSelectorRequestDTO
+                    .Select(s => new StudentResponseDTO
                     {
                         Id = s.Id,
                         Name = s.Name
