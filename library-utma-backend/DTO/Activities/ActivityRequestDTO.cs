@@ -5,7 +5,7 @@ namespace library_utma_backend.DTO.Activities
     public class ActivityRequestDTO
     {
 
-        [Required(ErrorMessage = "El campo StudentId es requerido.")]
+        [Required(ErrorMessage = "La matrícula del estudiante es requerida.")]
         public required string StudentId { get; set; }
 
         [Required(ErrorMessage = "El campo Description es requerido.")]
