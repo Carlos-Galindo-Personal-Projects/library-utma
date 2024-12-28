@@ -12,13 +12,15 @@ const Loans = () => {
     const [loans, setLoans] = useState<LoanRecord[]>([]);
     const [page, setPage] = useState<number>(Number(localStorage.getItem("pageLoan")) || 1);
     const [next, setNext] = useState<boolean>(false);
+    const [isReturned, setIsReturned] = useState<boolean>(false);
 
     useEffect(() => {
         async function fetchBooks() {
             try {
                 const response = await axiosInstance.get("/Loans", {
                     params: {
-                        page
+                        page,
+                        isReturned,
                     },
                 });
                 setLoans(response.data.loans);
@@ -33,7 +35,7 @@ const Loans = () => {
         }
 
         fetchBooks();
-    }, [page]);
+    }, [page, isReturned]);
 
     const handlePrevious = () => {
         if (page > 1) {
@@ -54,6 +56,10 @@ const Loans = () => {
 
     return (
         <>
+            <div className="flex justify-center items-center px-4 space-x-4 mb-6">
+                <label className="text-white">Libros devueltos</label>
+                <input type="checkbox" checked={isReturned} onChange={() => setIsReturned(!isReturned)} />
+            </div>
             <NavTableButtons
                 next={next}
                 page={page}

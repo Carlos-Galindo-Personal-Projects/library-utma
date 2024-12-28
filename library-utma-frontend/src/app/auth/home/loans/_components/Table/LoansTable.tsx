@@ -27,8 +27,8 @@ const LoansTable: FC<LoansTableProps> = ({ data, setPage }) => {
                                     {columns.map((col, colIndex) => (
                                         <td key={colIndex} className="px-4 py-2 text-center">
                                             {
-                                                col === 'loanDate' ? (
-                                                    new Date(row[col]).toLocaleDateString('es-MX')
+                                                col === 'loanDate' || col === "returnDate" ? (
+                                                    row[col] ? new Date(row[col]).toLocaleDateString('es-MX') : '-'
                                                 ) : typeof row[col] === 'boolean' ? (
                                                     row[col] ? 'Si' : 'No'
                                                 ) : (
