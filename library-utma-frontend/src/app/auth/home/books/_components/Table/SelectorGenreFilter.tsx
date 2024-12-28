@@ -42,7 +42,7 @@ const SelectorGenreFilter: FC<GenreFilterProps> = ({genreId, setGenreId, setPage
                 Filtrar por género:
 
             </label>
-            <select className="text-lg text-black rounded-lg bg-white" value={genreId} onChange={handleChange}>
+            <select className="text-lg text-black rounded-lg bg-white" value={genreId} onChange={handleChange} id='genre'>
                 {genres.length > 0 ? (
                     genres.map(genre => (
                         <option key={genre.id} value={genre.id} className='bg-white text-black'>{genre.name}</option>
