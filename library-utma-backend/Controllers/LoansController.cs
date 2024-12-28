@@ -78,7 +78,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Loans
         [HttpGet]
-        public async Task<ActionResult<LoansSummaryResponseDTO>> GetLoans(int page = 1)
+        public async Task<ActionResult<LoansSummaryResponseDTO>> GetLoans(bool isReturned, int page = 1)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace library_utma_backend.Controllers
                 const int pageSize = 10;
                 var query = _context.Loan.AsQueryable();
 
-                var filteredQuery = query.Where(l => !l.IsReturned);
+                var filteredQuery = query.Where(l => l.IsReturned == isReturned);
                 
                 var totalRecords = await filteredQuery.CountAsync();
 
@@ -107,9 +107,10 @@ namespace library_utma_backend.Controllers
                         Id = l.Id,
                         StudentId = l.StudentId,
                         StudentName = l.Student.Name,
-                        BookIsbn = l.BookISBN,
                         BookName = l.Book.Title,
-                        LoanDate = l.LoanDate
+                        LoanDate = l.LoanDate,
+                        ReturnDate = l.ReturnDate,
+                        IsReturned = l.IsReturned
                     })
                     .ToListAsync();
 
