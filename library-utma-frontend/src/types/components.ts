@@ -1,7 +1,7 @@
 import { UseFormRegister } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
-import { BookForm, EntranceForm } from "./requests";
-import { EntranceRecord, BookRecord, LoanRecord, Genre, StudentSelector } from "./responses";
+import { BookForm, EntranceForm, UserRegister } from "./requests";
+import { EntranceRecord, BookRecord, LoanRecord, Genre, StudentSelector, UserTypeSelector } from "./responses";
 
 export interface GenreSelectorProps {
   genres: Genre[];
@@ -71,4 +71,9 @@ export interface EditLoanButtonProps {
 export interface StudentSelectorProps {
   register: UseFormRegister<EntranceForm>;
   studentOptions: StudentSelector[]
+}
+
+export interface UserTypeSelectorProps {
+  register: UseFormRegister<UserRegister>;
+  userTypeOptions: UserTypeSelector[]
 }

@@ -37,3 +37,8 @@ export interface StudentSelector {
     id: `UTM${number}`;
     name: string;
 }
+
+export interface UserTypeSelector {
+    id: number;
+    name: string;
+}
