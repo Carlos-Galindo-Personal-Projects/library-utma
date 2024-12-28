@@ -12,6 +12,7 @@ using library_utma_backend.DTO.Books;
 using library_utma_backend.DTO.Genres;
 using library_utma_backend.DTO.Books.Requests;
 using library_utma_backend.DTO.Books.Responses;
+using library_utma_backend.Helpers;
 
 namespace library_utma_backend.Controllers
 {
@@ -28,6 +29,7 @@ namespace library_utma_backend.Controllers
 
         // POST: api/Books
         [HttpPost]
+        [AuthMiddleware]
         public async Task<ActionResult<ResponseMessage>> AddBook([FromBody] DTO.Books.Requests.BookRequestDTO bookRequest)
         {
             try
@@ -68,6 +70,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Books/summary
         [HttpGet("summary")]
+        [AuthMiddleware]
         public async Task<ActionResult<BooksSummaryResponseDTO>> GetSummaryBooks(int genreId, int page = 1)
         {
             try
@@ -123,6 +126,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Books/{isbn}
         [HttpGet("{isbn}")]
+        [AuthMiddleware]
         public async Task<ActionResult<FormResponseDTO>> GetBookByISBN(string isbn)
         {
             try
@@ -184,6 +188,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Books
         [HttpGet]
+        [AuthMiddleware]
         public async Task<ActionResult<IEnumerable<BookSelectorResponseDTO>>> GetBooksByTitle(string title)
         {
             try
@@ -217,6 +222,7 @@ namespace library_utma_backend.Controllers
 
         // PUT: api/Books/{isbn}
         [HttpPut("{isbn}")]
+        [AuthMiddleware]
         public async Task<ActionResult<ResponseMessage>> UpdateBookAmount(string isbn, [FromBody] BookUpdateRequestDTO updatedBookReequest)
         {
             try
@@ -263,6 +269,7 @@ namespace library_utma_backend.Controllers
 
         // DELETE: api/Books/{isbn}
         [HttpDelete("{isbn}")]
+        [AuthMiddleware]
         public async Task<ActionResult<ResponseMessage>> DeleteBook(string isbn)
         {
             try

@@ -9,6 +9,7 @@ using library_utma_backend.Context;
 using library_utma_backend.Models;
 using library_utma_backend.DTO.Students;
 using library_utma_backend.DTO.Books;
+using library_utma_backend.Helpers;
 
 namespace library_utma_backend.Controllers
 {
@@ -25,6 +26,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Students
         [HttpGet]
+        [AuthMiddleware]
         public async Task<ActionResult<IEnumerable<StudentResponseDTO>>> GetStudent(string id)
         {
             try

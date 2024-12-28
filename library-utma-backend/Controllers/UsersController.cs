@@ -131,6 +131,7 @@ namespace library_utma_backend.Controllers
         /// <response code="500">Error interno del servidor.</response>
         // POST: api/Users/Register
         [HttpPost("Register")]
+        [AuthMiddleware]
         public async Task<ActionResult<ResponseMessage>> Register([FromBody] RegisterRequestDTO registerRequestDTO)
         {
             try
@@ -183,17 +184,18 @@ namespace library_utma_backend.Controllers
 
         // DELETE: api/Users/maintenance
         [HttpDelete("maintenance")]
+        [AuthMiddleware]
         public async Task<ActionResult<ResponseMessage>> MaintenanceDB()
         {
             try
             {
-                var oneMonthAgo = DateTime.Now.AddMonths(-1);
+                var fourMonthsAgo = DateTime.Now.AddMonths(-4);
 
                 var activitiesToDelete = _context.Activity
-                    .Where(a => !a.InsideLibrary && a.FinalHour != null && a.FinalHour < oneMonthAgo);
+                    .Where(a => !a.InsideLibrary && a.FinalHour != null && a.FinalHour < fourMonthsAgo);
 
                 var loansToDelete = _context.Loan
-                    .Where(l => l.ReturnDate != null && l.ReturnDate < oneMonthAgo && l.IsReturned == true);
+                    .Where(l => l.ReturnDate != null && l.ReturnDate < fourMonthsAgo && l.IsReturned == true);
 
                 _context.Activity.RemoveRange(activitiesToDelete);
                 _context.Loan.RemoveRange(loansToDelete);

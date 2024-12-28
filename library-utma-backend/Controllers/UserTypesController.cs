@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using library_utma_backend.Context;
 using library_utma_backend.Models;
 using library_utma_backend.DTO.UserTypes;
+using library_utma_backend.Helpers;
 
 namespace library_utma_backend.Controllers
 {
@@ -24,6 +25,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/UserTypes
         [HttpGet]
+        [AuthMiddleware]
         public async Task<ActionResult<IEnumerable<UserTypeResponseDTO>>> GetUserType()
         {
             try

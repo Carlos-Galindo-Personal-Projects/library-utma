@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using library_utma_backend.Context;
 using library_utma_backend.Models;
 using library_utma_backend.DTO;
-using System.Security.Cryptography.X509Certificates;
 using library_utma_backend.DTO.Activities;
+using library_utma_backend.Helpers;
 
 namespace library_utma_backend.Controllers
 {
@@ -26,6 +26,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Activities
         [HttpPost]
+        [AuthMiddleware]
         public async Task<ActionResult<ResponseMessage>> AddAccess([FromBody] ActivityRequestDTO activityRequest)
         {
             try
@@ -77,6 +78,7 @@ namespace library_utma_backend.Controllers
 
         // PUT: api/Activities/{id}
         [HttpPut("{id}")]
+        [AuthMiddleware]
         public async Task<ActionResult<ResponseMessage>> UpdateAccess(int id)
         {
             try
@@ -116,6 +118,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Activities
         [HttpGet]
+        [AuthMiddleware]
         public async Task<ActionResult<ActivitiesRecordResponseDTO>> GetActivitiesFilterByActivity(bool isInside, int page = 1)
         {
             try

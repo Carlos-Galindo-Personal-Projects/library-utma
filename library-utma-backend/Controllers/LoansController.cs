@@ -9,6 +9,7 @@ using library_utma_backend.Context;
 using library_utma_backend.Models;
 using library_utma_backend.DTO;
 using library_utma_backend.DTO.Loans;
+using library_utma_backend.Helpers;
 
 namespace library_utma_backend.Controllers
 {
@@ -25,6 +26,7 @@ namespace library_utma_backend.Controllers
 
         // POST: api/Loans
         [HttpPost]
+        [AuthMiddleware]
         public async Task<ActionResult<ResponseMessage>> AddLoan([FromBody] LoanRequestDTO loanRequest)
         {
             try
@@ -78,6 +80,7 @@ namespace library_utma_backend.Controllers
 
         // GET: api/Loans
         [HttpGet]
+        [AuthMiddleware]
         public async Task<ActionResult<LoansSummaryResponseDTO>> GetLoans(bool isReturned, int page = 1)
         {
             try
@@ -134,6 +137,7 @@ namespace library_utma_backend.Controllers
 
         // PUT: api/Loans/{id}
         [HttpPut("{id}")]
+        [AuthMiddleware]
         public async Task<ActionResult<ResponseMessage>> ReturnLoan(int id)
         {
             try
