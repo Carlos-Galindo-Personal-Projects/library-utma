@@ -1,8 +1,5 @@
 import Link from "next/link";
 import Loans from "./_components/Loans";
-import SkeletonTable from "../_components/UI/CustomTableSkeleton";
-import { Suspense } from "react";
-import { numberColumnsLoans as columns } from "@/utils/tableHeaders";
 
 export default function LoansPage() {
 
@@ -25,12 +22,7 @@ export default function LoansPage() {
         </Link>
       </div>
       <div className="w-4/5 max-w-fit mx-auto mb-8">
-        <Suspense
-          fallback={<SkeletonTable columns={columns + 1} />}
-        >
-
-          <Loans />
-        </ Suspense>
+        <Loans />
       </div>
     </>
   );

@@ -6,6 +6,8 @@ import NavTableButtons from "../../_components/FiltersTable";
 import { LoanRecord } from "@/types/responses";
 import axiosInstance from "@/axios/axios";
 import { AxiosError } from "axios";
+import { numberColumnsLoans as columns } from "@/utils/tableHeaders";
+import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 
 const Loans = () => {
 
@@ -13,10 +15,12 @@ const Loans = () => {
     const [page, setPage] = useState<number>(Number(localStorage.getItem("pageLoan")) || 1);
     const [next, setNext] = useState<boolean>(false);
     const [isReturned, setIsReturned] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         async function fetchBooks() {
             try {
+                setLoading(true);
                 const response = await axiosInstance.get("/Loans", {
                     params: {
                         page,
@@ -31,6 +35,8 @@ const Loans = () => {
                     return
                 }
                 alert("Ha ocurrido un error");
+            } finally {
+                setLoading(false);
             }
         }
 
@@ -54,11 +60,14 @@ const Loans = () => {
         }
     };
 
+    if (loading) return <SkeletonTable columns={columns + 1} />
+
+
     return (
         <>
             <div className="flex justify-center items-center px-4 space-x-4 mb-6">
-                <label className="text-white">Libros devueltos</label>
-                <input type="checkbox" checked={isReturned} onChange={() => setIsReturned(!isReturned)} />
+                <label className="text-white" htmlFor="isReturned">Libros devueltos</label>
+                <input type="checkbox" id="isReturned" checked={isReturned} onChange={() => setIsReturned(!isReturned)} />
             </div>
             <NavTableButtons
                 next={next}
