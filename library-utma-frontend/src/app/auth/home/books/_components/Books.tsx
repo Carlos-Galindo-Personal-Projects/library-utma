@@ -7,6 +7,8 @@ import { AxiosError } from "axios";
 import axiosInstance from "@/axios/axios";
 import { BookRecord } from "@/types/responses";
 import SelectorGenreFilter from "./Table/SelectorGenreFilter";
+import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
+import { numberColumnsBooks as columns } from "@/utils/tableHeaders";
 
 const Books = () => {
 
@@ -14,10 +16,12 @@ const Books = () => {
     const [genreId, setGenreId] = useState<number>(Number(localStorage.getItem("genreId")) || 0);
     const [page, setPage] = useState<number>(Number(localStorage.getItem("pageBook")) || 1);
     const [next, setNext] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         async function fetchBooks() {
             try {
+                setLoading(true);
                 const response = await axiosInstance.get("/Books/summary", {
                     params: {
                         page: page,
@@ -32,6 +36,8 @@ const Books = () => {
                     return
                 }
                 alert("Ha ocurrido un error");
+            } finally {
+                setLoading(false);
             }
         }
 
@@ -54,6 +60,10 @@ const Books = () => {
             localStorage.setItem("pageBook", newPage.toString());
         }
     };
+
+    if ( loading ) return (
+        <SkeletonTable columns={columns + 1} />
+    )
 
     return (
         <>
