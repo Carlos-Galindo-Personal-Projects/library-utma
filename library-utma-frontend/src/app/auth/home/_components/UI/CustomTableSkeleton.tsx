@@ -27,7 +27,7 @@ const SkeletonTable: FC<SkeletonTableProps> = ({ columns }) => {
                         </tr>
                     </thead>
                     <tbody className="bg-[#072E33] divide-y divide-[#072E33]">
-                        {Array.from({ length: 7 }).map((_, rowIndex) => (
+                        {Array.from({ length: 4 }).map((_, rowIndex) => (
                             <tr key={rowIndex}>
                                 {Array.from({ length: columns }).map((_, colIndex) => (
                                     <td key={colIndex} className="px-4 py-3 whitespace-nowrap">
