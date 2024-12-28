@@ -33,10 +33,16 @@ const SelectorGenreFilter: FC<GenreFilterProps> = ({genreId, setGenreId, setPage
 
     return (
         <div
-            className='flex justify-center items-center'
+            className='flex items-center justify-center px-4 space-x-4 mb-6'
         >
-            <select className="text-lg text-black rounded-lg px-4 mb-6 bg-white" value={genreId} onChange={handleChange}>
-                <option value=""> Selecciona un género </option>
+            <label
+                className='text-lg text-white'
+                htmlFor="genre"
+            >
+                Filtrar por género:
+
+            </label>
+            <select className="text-lg text-black rounded-lg bg-white" value={genreId} onChange={handleChange}>
                 {genres.length > 0 ? (
                     genres.map(genre => (
                         <option key={genre.id} value={genre.id} className='bg-white text-black'>{genre.name}</option>
