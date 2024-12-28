@@ -49,7 +49,6 @@ const Entrances = () => {
             const newPage = page - 1;
             setPage(newPage);
             setNext(true);
-            localStorage.setItem("pageEntrance", newPage.toString());
         }
     };
 
@@ -57,7 +56,6 @@ const Entrances = () => {
         if (next) {
             const newPage = page + 1;
             setPage(newPage);
-            localStorage.setItem("pageEntrance", newPage.toString());
         }
     };
 
@@ -79,6 +77,7 @@ const Entrances = () => {
             />
             <EntrancesTable
                 data={entrances}
+                setPage={setPage}
             />
         </>
     );

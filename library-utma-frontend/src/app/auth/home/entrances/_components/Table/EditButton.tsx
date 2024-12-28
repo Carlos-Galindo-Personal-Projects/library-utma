@@ -4,8 +4,9 @@ import { FC } from "react"
 import { useRouter } from "next/navigation"
 import { AxiosError } from "axios";
 import axiosInstance from "@/axios/axios";
+import { MarkExitButtonProps } from "@/types/components";
 
-const ExitButton: FC<{ id: number }> = ({ id }) => {
+const ExitButton: FC<MarkExitButtonProps> = ({ id, setPage }) => {
 
     const router = useRouter();
 
@@ -13,6 +14,7 @@ const ExitButton: FC<{ id: number }> = ({ id }) => {
         try {
             const response = await axiosInstance.put(`/Activities/${id}`);
             alert(response.data.message);
+            setPage(1);
             router.refresh();
         } catch (error) {
             if (error instanceof AxiosError) {

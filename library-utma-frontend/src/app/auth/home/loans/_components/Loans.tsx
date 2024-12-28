@@ -12,7 +12,7 @@ import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 const Loans = () => {
 
     const [loans, setLoans] = useState<LoanRecord[]>([]);
-    const [page, setPage] = useState<number>(Number(localStorage.getItem("pageLoan")) || 1);
+    const [page, setPage] = useState<number>(1);
     const [next, setNext] = useState<boolean>(false);
     const [isReturned, setIsReturned] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
@@ -48,7 +48,6 @@ const Loans = () => {
             const newPage = page - 1;
             setPage(newPage);
             setNext(true);
-            localStorage.setItem("pageLoan", newPage.toString());
         }
     };
 
@@ -56,7 +55,6 @@ const Loans = () => {
         if (next) {
             const newPage = page + 1;
             setPage(newPage);
-            localStorage.setItem("pageLoan", newPage.toString());
         }
     };
 

@@ -3,7 +3,7 @@ import EditButton from './EditButton';
 import { EntrancesTableProps } from '@/types/components';
 import { entrancesHeaders as headers, entrancesColumns as columns } from '@/utils/tableHeaders';
 
-const EntrancesTable: FC<EntrancesTableProps> = ({ data }) => {
+const EntrancesTable: FC<EntrancesTableProps> = ({ data, setPage }) => {
     return (
         <div className="overflow-x-auto shadow-md rounded-lg mt-4">
             <table className="min-w-full table-auto">
@@ -50,7 +50,7 @@ const EntrancesTable: FC<EntrancesTableProps> = ({ data }) => {
                                         <div className="flex justify-center space-x-2">
                                             {
                                                 row.insideLibrary ? (
-                                                    <EditButton id={Number(row.id)} />
+                                                    <EditButton id={Number(row.id)} setPage={setPage} />
                                                 ) : (
                                                     <p>
                                                         No hay acciones disponibles

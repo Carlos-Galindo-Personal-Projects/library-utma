@@ -43,6 +43,7 @@ export interface LoansTableProps {
 
 export interface EntrancesTableProps {
   data: EntranceRecord[];
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
 export interface SkeletonTableProps {
@@ -76,4 +77,9 @@ export interface StudentSelectorProps {
 export interface UserTypeSelectorProps {
   register: UseFormRegister<UserRegister>;
   userTypeOptions: UserTypeSelector[]
+}
+
+export interface MarkExitButtonProps {
+  id: number;
+  setPage:Dispatch<SetStateAction<number>>
 }

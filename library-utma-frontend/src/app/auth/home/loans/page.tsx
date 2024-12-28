@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Loans from "./_components/Loans";
 
+
 export default function LoansPage() {
 
   return (

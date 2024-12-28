@@ -15,7 +15,6 @@ const CheckDevolutionButton: FC<EditLoanButtonProps> = ({ id, setPage }) => {
             const response = await axiosInstance.put(`/Loans/${id}`);
             alert(response.data.message);
             setPage(1);
-            localStorage.setItem("pageLoan", "1");
             router.refresh();
         } catch (error) {
             if (error instanceof AxiosError) {
