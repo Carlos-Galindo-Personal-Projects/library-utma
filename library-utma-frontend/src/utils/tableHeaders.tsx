@@ -9,7 +9,7 @@ const loanHeaders: string[] = ['Matrícula', 'Nombre', 'Libro', 'Fecha de prést
 const numberColumnsLoans: number = loanColumns.length;
 
 const entrancesColumns: (keyof EntranceRecord)[] = ['studentId', 'studentName', 'initialHour', 'finalHour', 'insideLibrary'];
-const entrancesHeaders = ['Matrícula', 'Nombre', 'Hora de entrada', 'Hora de salida', 'Dentro de la biblioteca'];
+const entrancesHeaders = ['Matrícula', 'Nombre', 'Entrada', 'Salida', 'Dentro de la biblioteca'];
 const numberColumnsEntrances: number = entrancesColumns.length;
 
 export {

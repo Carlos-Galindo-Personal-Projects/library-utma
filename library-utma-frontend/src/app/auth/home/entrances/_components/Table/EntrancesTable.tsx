@@ -29,6 +29,14 @@ const EntrancesTable: FC<EntrancesTableProps> = ({ data }) => {
                                             {
                                                 col === 'insideLibrary' ? (
                                                     row[col] ? 'Si' : 'No'
+                                                ) : col === "initialHour" || col === "finalHour" ? (
+                                                    row[col] ? new Date(row[col]).toLocaleString([], {
+                                                        year: 'numeric',
+                                                        month: '2-digit',
+                                                        day: '2-digit',
+                                                        hour: '2-digit',
+                                                        minute: '2-digit'
+                                                    }) : '-'
                                                 ) : typeof row[col] === 'boolean' ? (
                                                     row[col] ? 'Si' : 'No'
                                                 ) : (
@@ -36,6 +44,7 @@ const EntrancesTable: FC<EntrancesTableProps> = ({ data }) => {
                                                 )
                                             }
                                         </td>
+
                                     ))}
                                     <td className="px-4 py-2 text-center">
                                         <div className="flex justify-center space-x-2">

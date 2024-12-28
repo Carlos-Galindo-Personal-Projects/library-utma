@@ -11,7 +11,7 @@ import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 
 const Entrances = () => {
 
-    const [page, setPage] = useState<number>( 1);
+    const [page, setPage] = useState<number>(1);
     const [next, setNext] = useState<boolean>(false);
     const [entrances, setEntrances] = useState<EntranceRecord[]>([]);
     const [isInside, setIsInside] = useState<boolean>(true);
@@ -67,7 +67,7 @@ const Entrances = () => {
 
     return (
         <>
-            <div className="flex justify-center items-center space-x-6 my-6">
+            <div className="flex justify-center items-center px-4 space-x-4 mb-6">
                 <label className="text-white">Dentro de la biblioteca</label>
                 <input type="checkbox" checked={isInside} onChange={() => setIsInside(!isInside)} />
             </div>
