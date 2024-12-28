@@ -15,6 +15,7 @@ const ToggleDown = () => {
             <button
                 onClick={toggleDropdown}
                 className={`flex items-center justify-center w-10 h-10 rounded-full ${isDropdownOpen ? "bg-[#072E33]" : "hover:bg-[#072E33]"}`}
+                name='logout'
             >
                 <UserIcon isDropdownOpen={isDropdownOpen} />
             </button>
