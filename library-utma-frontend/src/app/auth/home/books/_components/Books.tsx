@@ -13,8 +13,8 @@ import { numberColumnsBooks as columns } from "@/utils/tableHeaders";
 const Books = () => {
 
     const [books, setBooks] = useState<BookRecord[]>([]);
-    const [genreId, setGenreId] = useState<number>(Number(localStorage.getItem("genreId")) || 0);
-    const [page, setPage] = useState<number>(Number(localStorage.getItem("pageBook")) || 1);
+    const [genreId, setGenreId] = useState<number>(0);
+    const [page, setPage] = useState<number>(1);
     const [next, setNext] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -49,7 +49,6 @@ const Books = () => {
             const newPage = page - 1;
             setPage(newPage);
             setNext(true);
-            localStorage.setItem("pageBook", newPage.toString());
         }
     };
 
@@ -57,7 +56,6 @@ const Books = () => {
         if (next) {
             const newPage = page + 1;
             setPage(newPage);
-            localStorage.setItem("pageBook", newPage.toString());
         }
     };
 
@@ -70,7 +68,6 @@ const Books = () => {
             <SelectorGenreFilter
                 genreId={genreId}
                 setGenreId={setGenreId}
-                setPage={setPage}
             />
             <NavTableButtons
                 next={next}

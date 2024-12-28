@@ -10,7 +10,6 @@ export interface GenreSelectorProps {
 }
 
 export interface GenreFilterProps {
-  setPage: Dispatch<SetStateAction<number>>;
   genreId: number;
   setGenreId: Dispatch<SetStateAction<number>>
 }

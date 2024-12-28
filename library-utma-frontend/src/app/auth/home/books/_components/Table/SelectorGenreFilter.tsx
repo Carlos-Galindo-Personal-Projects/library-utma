@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 import { Genre } from '@/types/responses';
 import { GenreFilterProps } from '@/types/components';
 
-const SelectorGenreFilter: FC<GenreFilterProps> = ({genreId, setGenreId, setPage}) => {
+const SelectorGenreFilter: FC<GenreFilterProps> = ({genreId, setGenreId}) => {
 
     const [genres, setGenres] = useState<Genre[]>([]);
 
@@ -27,8 +27,6 @@ const SelectorGenreFilter: FC<GenreFilterProps> = ({genreId, setGenreId, setPage
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setGenreId(Number(e.target.value))
-        localStorage.setItem("genreId", e.target.value);
-        setPage(1);
     }
 
     return (
@@ -43,6 +41,7 @@ const SelectorGenreFilter: FC<GenreFilterProps> = ({genreId, setGenreId, setPage
 
             </label>
             <select className="text-lg text-black rounded-lg bg-white" value={genreId} onChange={handleChange} id='genre'>
+                <option value="">Todos</option>
                 {genres.length > 0 ? (
                     genres.map(genre => (
                         <option key={genre.id} value={genre.id} className='bg-white text-black'>{genre.name}</option>
