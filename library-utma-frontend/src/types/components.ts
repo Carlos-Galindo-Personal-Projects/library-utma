@@ -18,6 +18,7 @@ export interface GenreFilterProps {
 export interface IconProps {
   IconComponent: React.ElementType;
   route: string;
+  name: string;
 }
 
 export interface ChildrenProps {
