@@ -68,8 +68,8 @@ const Entrances = () => {
     return (
         <>
             <div className="flex justify-center items-center px-4 space-x-4 mb-6">
-                <label className="text-white">Dentro de la biblioteca</label>
-                <input type="checkbox" checked={isInside} onChange={() => setIsInside(!isInside)} />
+                <label className="text-white" htmlFor="isInside">Dentro de la biblioteca</label>
+                <input type="checkbox" id="isInside" checked={isInside} onChange={() => setIsInside(!isInside)} />
             </div>
             <NavTableButtons
                 next={next}
