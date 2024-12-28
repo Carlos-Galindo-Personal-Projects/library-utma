@@ -35,11 +35,11 @@ const SelectorGenreFilter: FC<GenreFilterProps> = ({genreId, setGenreId, setPage
         <div
             className='flex justify-center items-center'
         >
-            <select className="text-lg text-black rounded-lg px-4 mb-6 bg-[#6DA5C0]" value={genreId} onChange={handleChange}>
+            <select className="text-lg text-white rounded-lg px-4 mb-6 bg-[#6DA5C0]" value={genreId} onChange={handleChange}>
                 <option value=""> Selecciona un género </option>
                 {genres.length > 0 ? (
                     genres.map(genre => (
-                        <option key={genre.id} value={genre.id} className='bg-white'>{genre.name}</option>
+                        <option key={genre.id} value={genre.id} className='bg-[#6DA5C0] text-white'>{genre.name}</option>
                     ))
                 ) : (
                     <option value="">Cargando...</option>
