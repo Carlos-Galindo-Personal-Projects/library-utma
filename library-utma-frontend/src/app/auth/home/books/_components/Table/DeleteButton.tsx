@@ -16,7 +16,6 @@ const DeleteBook: FC<DeleteBookButtonProps> = ({ isbn, setPage }) => {
                 const response = await axiosInstance.delete(`/Books/${isbn}`);
                 alert(response.data.message);
                 setPage(1);
-                localStorage.setItem("pageBook", "1");
                 router.refresh();
             } catch (error) {
                 if (error instanceof AxiosError) {
