@@ -1,32 +1,13 @@
-import React, { FC, useEffect, useState } from 'react'
-import axiosInstance from '@/axios/axios';
-import { AxiosError } from 'axios';
-import { Genre } from '@/types/responses';
 import { GenreFilterProps } from '@/types/components';
+import { useRouter } from 'next/navigation';
 
-const SelectorGenreFilter: FC<GenreFilterProps> = ({genreId, setGenreId}) => {
+export default function SelectorGenreFilter({ currentGenreId, genres, page, setCurrentGenreId }: GenreFilterProps){
 
-    const [genres, setGenres] = useState<Genre[]>([]);
+    const router = useRouter();
 
-    useEffect(() => {
-        async function fetchGenres() {
-            try {
-                const response = await axiosInstance.get("/Genres");
-                setGenres(response.data);
-            } catch (error) {
-                if (error instanceof AxiosError) {
-                    alert(error.response?.data)
-                    return
-                }
-                alert("Ha ocurrido un error");
-            }
-        }
-
-        fetchGenres();
-    }, []);
-
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setGenreId(Number(e.target.value))
+    const handleChange = (value: string) => {
+        setCurrentGenreId(parseInt(value));
+        router.push(`/auth/home/books/filter/${page}/${value}`);
     }
 
     return (
@@ -40,8 +21,8 @@ const SelectorGenreFilter: FC<GenreFilterProps> = ({genreId, setGenreId}) => {
                 Filtrar por género:
 
             </label>
-            <select className="text-lg text-black rounded-lg bg-white" value={genreId} onChange={handleChange} id='genre'>
-                <option value="">Todos</option>
+            <select className="text-lg text-black rounded-lg bg-white" value={currentGenreId} onChange={(e) => handleChange(e.target.value)} id='genre'>
+                <option value={0}>Todos</option>
                 {genres.length > 0 ? (
                     genres.map(genre => (
                         <option key={genre.id} value={genre.id} className='bg-white text-black'>{genre.name}</option>
@@ -53,5 +34,3 @@ const SelectorGenreFilter: FC<GenreFilterProps> = ({genreId, setGenreId}) => {
         </div>
     )
 }
-
-export default SelectorGenreFilter

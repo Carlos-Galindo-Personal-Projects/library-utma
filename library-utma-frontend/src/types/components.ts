@@ -10,8 +10,10 @@ export interface GenreSelectorProps {
 }
 
 export interface GenreFilterProps {
-  genreId: number;
-  setGenreId: Dispatch<SetStateAction<number>>
+  currentGenreId: number;
+  setCurrentGenreId: Dispatch<SetStateAction<number>>;
+  page: number;
+  genres: Genre[];
 }
 
 export interface IconProps {
@@ -31,9 +33,9 @@ export interface BooksTableProps {
 
 export interface FilterTableProps {
   next: boolean;
-  page: number;
-  handlePrevious: () => void;
-  handleNext: () => void;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  currentCategoryId: number;
 }
 
 export interface LoansTableProps {

@@ -1,20 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import BooksTable from "./Table/BooksTable";
 import NavTableButtons from "../../_components/FiltersTable";
 import { AxiosError } from "axios";
 import axiosInstance from "@/axios/axios";
-import { BookRecord } from "@/types/responses";
+import { BookRecord, Genre } from "@/types/responses";
 import SelectorGenreFilter from "./Table/SelectorGenreFilter";
 import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 import { numberColumnsBooks as columns } from "@/utils/tableHeaders";
 
-const Books = () => {
+const Books: FC<{genres: Genre[]; page: number; genreId: number}> = ({ genres, page, genreId }) => {
 
     const [books, setBooks] = useState<BookRecord[]>([]);
-    const [genreId, setGenreId] = useState<number>(0);
-    const [page, setPage] = useState<number>(1);
+    const [currentGenreId, setCurrentGenreId] = useState<number>(genreId);
+    const [currentPage, setCurrentPage] = useState<number>(page);
     const [next, setNext] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -24,8 +24,8 @@ const Books = () => {
                 setLoading(true);
                 const response = await axiosInstance.get("/Books/summary", {
                     params: {
-                        page: page,
-                        genreId: genreId,
+                        page: currentPage,
+                        genreId: currentGenreId,
                     },
                 });
                 setBooks(response.data.books);
@@ -44,21 +44,6 @@ const Books = () => {
         fetchBooks();
     }, [page, genreId]);
 
-    const handlePrevious = () => {
-        if (page > 1) {
-            const newPage = page - 1;
-            setPage(newPage);
-            setNext(true);
-        }
-    };
-
-    const handleNext = () => {
-        if (next) {
-            const newPage = page + 1;
-            setPage(newPage);
-        }
-    };
-
     if ( loading ) return (
         <SkeletonTable columns={columns + 1} />
     )
@@ -66,18 +51,20 @@ const Books = () => {
     return (
         <>
             <SelectorGenreFilter
-                genreId={genreId}
-                setGenreId={setGenreId}
+                genres={genres}
+                currentGenreId={currentGenreId}
+                setCurrentGenreId={setCurrentGenreId}
+                page={currentPage}
             />
             <NavTableButtons
                 next={next}
-                page={page}
-                handlePrevious={handlePrevious}
-                handleNext={handleNext}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                currentCategoryId={currentGenreId}
             />
             <BooksTable
                 data={books}
-                setPage={setPage}
+                setPage={setCurrentPage}
             />
         </>
     );

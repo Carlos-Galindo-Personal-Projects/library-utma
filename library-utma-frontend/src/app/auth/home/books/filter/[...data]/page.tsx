@@ -1,7 +1,11 @@
 import Link from "next/link";
-import Books from "./_components/Books";
+import BookGenres from "../../_components/BookGenres";
 
-export default function BooksPage() {
+export default async function BooksPage({ params }: { params: Promise<{ data: string[] }> }) {
+
+  const { data } = await params;
+  const page = Number(data[0]);
+  const genreId = Number(data[1]);
 
   return (
     <>
@@ -22,7 +26,7 @@ export default function BooksPage() {
         </Link>
       </div>
       <div className="w-4/5 max-w-fit mx-auto mb-8">
-        <Books />
+        <BookGenres page={page} genreId={genreId} />
       </div>
     </>
   );
