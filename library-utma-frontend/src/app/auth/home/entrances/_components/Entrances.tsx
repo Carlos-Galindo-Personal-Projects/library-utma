@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import EntrancesTable from "./Table/EntrancesTable";
 import NavTableButtons from "../../_components/FiltersTable";
 import { EntranceRecord } from "@/types/responses";
@@ -9,9 +9,9 @@ import axiosInstance from "@/axios/axios";
 import { numberColumnsEntrances as columns } from "@/utils/tableHeaders";
 import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 
-const Entrances = () => {
+const Entrances: FC<{ currentPage: number }> = ({ currentPage }) => {
 
-    const [page, setPage] = useState<number>(1);
+    const [page, setPage] = useState<number>(currentPage);
     const [next, setNext] = useState<boolean>(false);
     const [entrances, setEntrances] = useState<EntranceRecord[]>([]);
     const [isInside, setIsInside] = useState<boolean>(true);
@@ -44,21 +44,6 @@ const Entrances = () => {
         fetchEntrances();
     }, [page, isInside])
 
-    const handlePrevious = () => {
-        if (page > 1) {
-            const newPage = page - 1;
-            setPage(newPage);
-            setNext(true);
-        }
-    };
-
-    const handleNext = () => {
-        if (next) {
-            const newPage = page + 1;
-            setPage(newPage);
-        }
-    };
-
     if (loading) {
         return <SkeletonTable columns={columns + 1} />
     }
@@ -71,9 +56,9 @@ const Entrances = () => {
             </div>
             <NavTableButtons
                 next={next}
-                page={page}
-                handlePrevious={handlePrevious}
-                handleNext={handleNext}
+                currentPage={page}
+                setCurrentPage={setPage}
+                route="/auth/home/entrances/filter/"
             />
             <EntrancesTable
                 data={entrances}

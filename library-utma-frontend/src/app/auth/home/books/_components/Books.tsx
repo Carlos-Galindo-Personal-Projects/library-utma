@@ -13,7 +13,7 @@ import { numberColumnsBooks as columns } from "@/utils/tableHeaders";
 const Books: FC<{genres: Genre[]; page: number; genreId: number}> = ({ genres, page, genreId }) => {
 
     const [books, setBooks] = useState<BookRecord[]>([]);
-    const [currentGenreId, setCurrentGenreId] = useState<number>(genreId);
+    const [currentGenreId, setCurrentGenreId] = useState<number>(genreId || 0);
     const [currentPage, setCurrentPage] = useState<number>(page);
     const [next, setNext] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
@@ -61,6 +61,7 @@ const Books: FC<{genres: Genre[]; page: number; genreId: number}> = ({ genres, p
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 currentCategoryId={currentGenreId}
+                route="/auth/home/books/filter/"
             />
             <BooksTable
                 data={books}

@@ -35,7 +35,8 @@ export interface FilterTableProps {
   next: boolean;
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
-  currentCategoryId: number;
+  currentCategoryId?: number;
+  route: string;
 }
 
 export interface LoansTableProps {

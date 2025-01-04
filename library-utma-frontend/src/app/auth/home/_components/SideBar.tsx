@@ -14,7 +14,7 @@ export default function SideBar() {
   const icons = [
     { IconComponent: LoanIcon, route: "/auth/home/loans", name: "Loans" },
     { IconComponent: BookIcon, route: "/auth/home/books/filter/1/0", name: "Books" },
-    { IconComponent: EntranceIcon, route: "/auth/home/entrances", name: "Entrances" },
+    { IconComponent: EntranceIcon, route: "/auth/home/entrances/filter/1", name: "Entrances" },
     { IconComponent: UsersIcon, route: "/auth/home/users", name: "Users" },
     { IconComponent: DatabaseIcon, route: "/auth/home/database", name: "Database" },
   ];

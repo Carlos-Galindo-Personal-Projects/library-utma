@@ -1,7 +1,10 @@
-import Entrances from "./_components/Entrances";
+import Entrances from "../../_components/Entrances";
 import Link from "next/link";
 
-export default function EntrancePage() {
+export default async function EntrancePage({ params }: { params: Promise<{ page: string }> }) {
+
+  const { page } = await params;
+  const currentPage = Number(page);
 
   return (
     <>
@@ -17,7 +20,7 @@ export default function EntrancePage() {
       </div>
 
       <div className="w-4/5 max-w-fit mx-auto mb-8">
-        <Entrances />
+        <Entrances currentPage={currentPage} />
       </div>
     </>
   );
