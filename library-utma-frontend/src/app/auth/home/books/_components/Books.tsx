@@ -42,7 +42,7 @@ const Books: FC<{genres: Genre[]; page: number; genreId: number}> = ({ genres, p
         }
 
         fetchBooks();
-    }, [page, genreId]);
+    }, [currentGenreId, currentPage]);
 
     if ( loading ) return (
         <SkeletonTable columns={columns + 1} />
