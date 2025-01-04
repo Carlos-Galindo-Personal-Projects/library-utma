@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=ts,npm,tailwind,next,mysql,dotnet&perline=12" />
+    <img src="https://skillicons.dev/icons?i=ts,next,dotnet,mysql,tailwind&perline=12" />
   </a>
 </p>
 
