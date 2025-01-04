@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=ts,next,dotnet,mysql,tailwind&perline=12" />
+    <img src="https://skillicons.dev/icons?i=ts,next,dotnet,mysql,tailwind&perline=12" alt="IT Skills" />
   </a>
 </p>
 
