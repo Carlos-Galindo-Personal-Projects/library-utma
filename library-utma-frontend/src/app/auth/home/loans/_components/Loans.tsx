@@ -1,6 +1,6 @@
 'use client'
 
-import {  useEffect, useState } from "react";
+import {  FC, useEffect, useState } from "react";
 import LoansTable from "./Table/LoansTable"
 import NavTableButtons from "../../_components/FiltersTable";
 import { LoanRecord } from "@/types/responses";
@@ -9,10 +9,10 @@ import { AxiosError } from "axios";
 import { numberColumnsLoans as columns } from "@/utils/tableHeaders";
 import SkeletonTable from "../../_components/UI/CustomTableSkeleton";
 
-const Loans = () => {
+const Loans: FC<{ currentPage: number }> = ({ currentPage }) => {
 
     const [loans, setLoans] = useState<LoanRecord[]>([]);
-    const [page, setPage] = useState<number>(1);
+    const [page, setPage] = useState<number>(currentPage);
     const [next, setNext] = useState<boolean>(false);
     const [isReturned, setIsReturned] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
@@ -43,21 +43,6 @@ const Loans = () => {
         fetchBooks();
     }, [page, isReturned]);
 
-    const handlePrevious = () => {
-        if (page > 1) {
-            const newPage = page - 1;
-            setPage(newPage);
-            setNext(true);
-        }
-    };
-
-    const handleNext = () => {
-        if (next) {
-            const newPage = page + 1;
-            setPage(newPage);
-        }
-    };
-
     if (loading) return <SkeletonTable columns={columns + 1} />
 
 
@@ -69,9 +54,9 @@ const Loans = () => {
             </div>
             <NavTableButtons
                 next={next}
-                page={page}
-                handlePrevious={handlePrevious}
-                handleNext={handleNext}
+                currentPage={page}
+                setCurrentPage={setPage}
+                route="/auth/home/loans/filter/"
             />
             <LoansTable
                 data={loans}

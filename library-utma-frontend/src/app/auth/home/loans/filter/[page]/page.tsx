@@ -1,8 +1,11 @@
 import Link from "next/link";
-import Loans from "./_components/Loans";
+import Loans from "../../_components/Loans";
 
 
-export default function LoansPage() {
+export default async function LoansPage({ params }: { params: Promise<{ page: string }> }) {
+
+  const { page } = await params;
+  const currentPage = Number(page);
 
   return (
     <>
@@ -23,7 +26,7 @@ export default function LoansPage() {
         </Link>
       </div>
       <div className="w-4/5 max-w-fit mx-auto mb-8">
-        <Loans />
+        <Loans currentPage={currentPage} />
       </div>
     </>
   );
