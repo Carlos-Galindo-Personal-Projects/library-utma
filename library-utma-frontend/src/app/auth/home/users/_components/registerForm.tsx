@@ -9,28 +9,9 @@ import { AxiosError } from "axios";
 import axiosInstance from "@/axios/axios";
 import { useRouter } from "next/navigation";
 import UserTypeSelects from "./UserTypeSelects";
-import { useEffect, useState } from "react";
 import { UserTypeSelector } from "@/types/responses";
 
-export default function RegisterForm() {
-
-  const [userTypes, setUserTypes] = useState<UserTypeSelector[]>([]);
-
-  useEffect(() => {
-    const fetchUserTypes = async () => {
-      try {
-        const response = await axiosInstance.get("/UserTypes");
-        setUserTypes(response.data);
-      } catch (error) {
-        if (error instanceof AxiosError){
-          alert(error.response?.data);
-          return;
-        }
-        alert("Ha ocurrido un error");
-      }
-    }
-    fetchUserTypes();
-  }, []);
+export default function RegisterForm({ userTypes }: { userTypes: UserTypeSelector[] }) {
 
   const router = useRouter();
 
